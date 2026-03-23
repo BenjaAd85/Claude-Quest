@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import CopyButton from "./CopyButton";
@@ -9,7 +10,7 @@ const lessons: Record<string, { title: string; description: string; content: str
     content: "",
   },
   "2": {
-    title: "Your First Build — Solve Something Annoying",
+    title: "Your First Build — From Idea to Live on the Internet",
     description: "The best first project isn't impressive. It's useful.",
     content: "",
   },
@@ -373,28 +374,27 @@ function Lesson1Content() {
 /* ─── Lesson 2 Custom Content ────────────────────────────────── */
 
 function Lesson2Content() {
-  const steps = [
+  const steps: { number: string; title: string; body: React.ReactNode }[] = [
     {
       number: "1",
       title: "Pick your annoyance",
       body: (
         <>
           <p className="text-zinc-600 leading-relaxed mb-4">
-            Think of one small thing in your daily life or work that wastes your time. It doesn&apos;t need to be technical. Examples:
+            Think of one small thing that wastes your time. Write it in one sentence. Examples:
           </p>
-          <ul className="space-y-2 mb-2">
+          <ul className="space-y-2">
             {[
-              "\"I always forget what I need to pack for trips\"",
-              "\"I spend too long formatting my meeting notes\"",
-              "\"I want to track my daily habits somewhere simple\"",
+              '"I always forget what to pack for trips"',
+              '"I want a simple place to track my daily habits"',
+              '"I spend too long formatting meeting notes"',
             ].map((ex) => (
               <li key={ex} className="flex items-start gap-2 text-zinc-500 text-sm">
-                <span className="text-orange-400 mt-0.5">•</span>
+                <span className="text-orange-400 mt-0.5 shrink-0">•</span>
                 <span>{ex}</span>
               </li>
             ))}
           </ul>
-          <p className="text-zinc-600 text-sm mt-4 font-medium">Got one? Write it down in one sentence.</p>
         </>
       ),
     },
@@ -404,11 +404,10 @@ function Lesson2Content() {
       body: (
         <>
           <p className="text-zinc-600 leading-relaxed mb-4">Open Terminal and type:</p>
-          <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-4">
+          <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
             <code className="text-green-400 text-sm font-mono flex-1 select-all">claude</code>
             <CopyButton text="claude" />
           </div>
-          <p className="text-zinc-600 leading-relaxed">Hit enter. You&apos;ll see the Claude Code prompt appear.</p>
         </>
       ),
     },
@@ -417,26 +416,17 @@ function Lesson2Content() {
       title: "Describe what you want",
       body: (
         <>
-          <p className="text-zinc-600 leading-relaxed mb-6">
-            Type your idea in plain English. Be specific.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-            {/* Weak prompt */}
+          <p className="text-zinc-600 leading-relaxed mb-5">Be specific.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
             <div className="rounded-xl border border-red-200 bg-red-50 p-4">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-red-500 text-sm font-semibold">✕ Weak prompt</span>
-              </div>
+              <p className="text-red-500 text-xs font-semibold mb-2">❌ Weak prompt</p>
               <p className="text-red-700 text-sm font-mono leading-relaxed">&ldquo;Make me an app&rdquo;</p>
             </div>
-            {/* Strong prompt */}
             <div className="rounded-xl border border-green-200 bg-green-50 p-4">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-green-600 text-sm font-semibold">✓ Strong prompt</span>
-              </div>
-              <p className="text-green-800 text-sm font-mono leading-relaxed">&ldquo;Build me a simple packing list app. I enter my destination and trip length, and it gives me a checklist of what to pack. It should work in the browser.&rdquo;</p>
+              <p className="text-green-600 text-xs font-semibold mb-2">✅ Strong prompt</p>
+              <p className="text-green-800 text-sm font-mono leading-relaxed">&ldquo;Build me a simple packing list app. I enter my destination and trip length and it gives me a checklist of what to pack. It should work in the browser as a Next.js app.&rdquo;</p>
             </div>
           </div>
-          <p className="text-zinc-500 text-sm">The more specific you are, the better the result.</p>
         </>
       ),
     },
@@ -444,29 +434,102 @@ function Lesson2Content() {
       number: "4",
       title: "Watch it build",
       body: (
-        <p className="text-zinc-600 leading-relaxed">
-          Claude Code will start creating files. You&apos;ll see it working through a list of tasks. This takes a few minutes — let it run.
-          <br /><br />
-          When it&apos;s done it will tell you how to view it.
-        </p>
+        <>
+          <p className="text-zinc-600 leading-relaxed mb-4">
+            Claude Code will create files and work through a task list. Let it run. When it&apos;s done it will tell you how to view it locally.
+          </p>
+          <p className="text-zinc-600 leading-relaxed mb-4">To see it in your browser, run:</p>
+          <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-4">
+            <code className="text-green-400 text-sm font-mono flex-1 select-all">npm run dev</code>
+            <CopyButton text="npm run dev" />
+          </div>
+          <p className="text-zinc-600 text-sm">
+            Then open{" "}
+            <a href="http://localhost:3000" className="text-orange-500 hover:text-orange-600 font-mono text-xs">
+              http://localhost:3000
+            </a>
+          </p>
+        </>
       ),
     },
     {
       number: "5",
-      title: "If you get stuck, just ask",
+      title: "Set up GitHub",
       body: (
         <>
           <p className="text-zinc-600 leading-relaxed mb-4">
-            If Claude Code says something confusing, type exactly this:
+            GitHub stores your project safely in the cloud. If you haven&apos;t already, create a free account and then create a new repository called the name of your project.
           </p>
-          <div className="flex items-start gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-4">
-            <code className="text-green-400 text-sm font-mono flex-1 leading-relaxed select-all">
-              I don&apos;t understand. Can you explain what I need to do next in simple terms?
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-xs font-medium bg-zinc-900 text-white px-3 py-1.5 rounded-lg hover:bg-zinc-700 transition-colors mb-5"
+          >
+            github.com →
+          </a>
+          <p className="text-zinc-600 leading-relaxed mb-4">
+            Now connect your project to GitHub. In Claude Code type:
+          </p>
+          <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+            <code className="text-green-400 text-sm font-mono flex-1 select-all">
+              Connect this project to GitHub and push all files
             </code>
-            <CopyButton text="I don't understand. Can you explain what I need to do next in simple terms?" />
+            <CopyButton text="Connect this project to GitHub and push all files" />
           </div>
-          <p className="text-zinc-600 text-sm leading-relaxed">
-            That&apos;s the biggest unlock. You never have to google anything — just ask.
+          <p className="text-zinc-500 text-sm mt-3">Claude Code will walk you through it.</p>
+        </>
+      ),
+    },
+    {
+      number: "6",
+      title: "Set up Vercel",
+      body: (
+        <>
+          <p className="text-zinc-600 leading-relaxed mb-4">
+            Vercel puts your app on the internet. Go to Vercel and sign up using your GitHub account — this connects both automatically.
+          </p>
+          <a
+            href="https://vercel.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block text-xs font-medium bg-zinc-900 text-white px-3 py-1.5 rounded-lg hover:bg-zinc-700 transition-colors mb-5"
+          >
+            vercel.com →
+          </a>
+          <p className="text-zinc-600 leading-relaxed">
+            Then click <span className="font-medium text-zinc-800">&ldquo;Add New Project&rdquo;</span>, find your GitHub repository, and click Deploy. Vercel builds and hosts your app in about 60 seconds.
+          </p>
+        </>
+      ),
+    },
+    {
+      number: "7",
+      title: "You're live",
+      body: (
+        <p className="text-zinc-600 leading-relaxed">
+          Vercel gives you a real URL like{" "}
+          <span className="font-mono text-sm text-zinc-800 bg-zinc-100 px-1.5 py-0.5 rounded">your-app.vercel.app</span>.
+          {" "}Send it to someone. That&apos;s a real app, built by you, live on the internet.
+        </p>
+      ),
+    },
+    {
+      number: "8",
+      title: "Make changes",
+      body: (
+        <>
+          <p className="text-zinc-600 leading-relaxed mb-4">
+            Every time you improve your app, just tell Claude Code in Terminal:
+          </p>
+          <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+            <code className="text-green-400 text-sm font-mono flex-1 select-all">
+              Commit and push all changes to GitHub
+            </code>
+            <CopyButton text="Commit and push all changes to GitHub" />
+          </div>
+          <p className="text-zinc-500 text-sm mt-3">
+            Vercel detects the update and redeploys automatically. Your live site updates in seconds.
           </p>
         </>
       ),
@@ -479,18 +542,17 @@ function Lesson2Content() {
       {/* Intro */}
       <div className="bg-orange-50 border border-orange-100 rounded-2xl p-6">
         <p className="text-orange-800 text-lg font-medium leading-relaxed">
-          Forget building the next big app. The best way to learn Claude Code is to fix something small that bugs you every day.
+          Forget building the next big app. Fix something small that bugs you every day.
         </p>
         <p className="text-orange-700 text-sm mt-3 leading-relaxed">
-          A folder that&apos;s always a mess. A repetitive task at work. A form you fill out over and over. Something that makes you think &ldquo;there has to be a better way.&rdquo; That&apos;s your first project.
+          By the end of this lesson your project will be live on the internet with a real URL.
         </p>
       </div>
 
       {/* Steps */}
-      <div className="space-y-6">
+      <div className="space-y-0">
         {steps.map((step, i) => (
           <div key={step.number} className="flex gap-4">
-            {/* Number + connector */}
             <div className="flex flex-col items-center shrink-0">
               <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">
                 {step.number}
@@ -499,8 +561,7 @@ function Lesson2Content() {
                 <div className="w-px flex-1 bg-zinc-100 mt-2" />
               )}
             </div>
-            {/* Content */}
-            <div className="flex-1 pb-8">
+            <div className="flex-1 pb-10">
               <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">
                 Step {step.number} — {step.title}
               </h3>
@@ -514,7 +575,7 @@ function Lesson2Content() {
       <div className="bg-orange-500 rounded-2xl p-6 text-white">
         <p className="text-sm font-semibold text-orange-200 uppercase tracking-wide mb-2">Key Takeaway</p>
         <p className="text-lg font-semibold leading-relaxed">
-          Your first prompt doesn&apos;t need to be perfect. Start specific, watch it build, then improve from there. That loop — describe, build, tweak — is the whole skill.
+          Describe it → Claude Code builds it → Push to GitHub → Vercel makes it live. That&apos;s the complete loop. You&apos;ll use it for every project from here.
         </p>
       </div>
 
