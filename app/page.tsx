@@ -36,7 +36,7 @@ export default function Home() {
       number: 6,
       title: "Debugging with Claude",
       description: "Walk through a broken app and fix it together with Claude Code step by step.",
-      status: "coming-soon",
+      status: "available",
     },
     {
       number: 7,
