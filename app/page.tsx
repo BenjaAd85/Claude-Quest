@@ -24,7 +24,7 @@ export default function Home() {
       number: 4,
       title: "Reading and Editing Files",
       description: "Learn how Claude Code reads your project and makes precise changes across multiple files.",
-      status: "coming-soon",
+      status: "available",
     },
     {
       number: 5,
