@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import CopyButton from "./CopyButton";
 
 const lessons: Record<string, { title: string; description: string; content: string }> = {
   "1": {
@@ -134,6 +135,107 @@ function Lesson1Content() {
         <p className="text-zinc-600 leading-relaxed">
           Regular Claude gives you text. Claude Code actually <em>does things</em> — it creates files, writes code, and builds working apps on your computer. Same brain, way more hands.
         </p>
+      </section>
+
+      {/* Before You Start */}
+      <section>
+        <h2 className="text-xl font-bold text-zinc-900 mb-2">Before You Start: Get Set Up</h2>
+        <p className="text-zinc-500 text-sm mb-6">Four quick things to do before Mission 2.</p>
+
+        <div className="space-y-4">
+
+          {/* Step 1 */}
+          <div className="flex gap-4 p-5 rounded-2xl border border-zinc-100 bg-white">
+            <div className="flex flex-col items-center gap-1 shrink-0">
+              <div className="w-7 h-7 rounded-full bg-green-100 text-green-600 text-xs font-bold flex items-center justify-center">1</div>
+              <div className="w-px flex-1 bg-zinc-100" />
+            </div>
+            <div className="flex-1 pt-0.5">
+              <div className="flex items-start justify-between gap-4 flex-wrap">
+                <div>
+                  <p className="font-semibold text-zinc-900 text-sm">Install Node.js</p>
+                  <p className="text-zinc-500 text-sm mt-0.5">Required to run Claude Code on your computer.</p>
+                </div>
+                <a
+                  href="https://nodejs.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 text-xs font-medium bg-zinc-900 text-white px-3 py-1.5 rounded-lg hover:bg-zinc-700 transition-colors"
+                >
+                  nodejs.org →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 2 */}
+          <div className="flex gap-4 p-5 rounded-2xl border border-zinc-100 bg-white">
+            <div className="flex flex-col items-center gap-1 shrink-0">
+              <div className="w-7 h-7 rounded-full bg-green-100 text-green-600 text-xs font-bold flex items-center justify-center">2</div>
+              <div className="w-px flex-1 bg-zinc-100" />
+            </div>
+            <div className="flex-1 pt-0.5">
+              <div className="flex items-start justify-between gap-4 flex-wrap">
+                <div>
+                  <p className="font-semibold text-zinc-900 text-sm">Create a GitHub account</p>
+                  <p className="text-zinc-500 text-sm mt-0.5">Free cloud storage for your project files.</p>
+                </div>
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 text-xs font-medium bg-zinc-900 text-white px-3 py-1.5 rounded-lg hover:bg-zinc-700 transition-colors"
+                >
+                  github.com →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 3 */}
+          <div className="flex gap-4 p-5 rounded-2xl border border-zinc-100 bg-white">
+            <div className="flex flex-col items-center gap-1 shrink-0">
+              <div className="w-7 h-7 rounded-full bg-green-100 text-green-600 text-xs font-bold flex items-center justify-center">3</div>
+              <div className="w-px flex-1 bg-zinc-100" />
+            </div>
+            <div className="flex-1 pt-0.5">
+              <div className="flex items-start justify-between gap-4 flex-wrap">
+                <div>
+                  <p className="font-semibold text-zinc-900 text-sm">Create a Vercel account</p>
+                  <p className="text-zinc-500 text-sm mt-0.5">Sign up with GitHub to connect both at once.</p>
+                </div>
+                <a
+                  href="https://vercel.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 text-xs font-medium bg-zinc-900 text-white px-3 py-1.5 rounded-lg hover:bg-zinc-700 transition-colors"
+                >
+                  vercel.com →
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Step 4 */}
+          <div className="flex gap-4 p-5 rounded-2xl border border-zinc-100 bg-white">
+            <div className="flex flex-col items-center gap-1 shrink-0">
+              <div className="w-7 h-7 rounded-full bg-green-100 text-green-600 text-xs font-bold flex items-center justify-center">4</div>
+            </div>
+            <div className="flex-1 pt-0.5">
+              <p className="font-semibold text-zinc-900 text-sm">Install Claude Code</p>
+              <p className="text-zinc-500 text-sm mt-0.5 mb-3">Open Terminal and paste:</p>
+              <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+                <code className="text-green-400 text-xs font-mono flex-1 select-all">
+                  npm install -g @anthropic-ai/claude-code
+                </code>
+                <CopyButton text="npm install -g @anthropic-ai/claude-code" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <p className="mt-6 text-sm font-bold text-zinc-900">Done? Let&apos;s go.</p>
       </section>
 
       {/* What you'll use it with */}
