@@ -618,6 +618,40 @@ function Lesson2Content() {
         </p>
       </div>
 
+      {/* ── PART 0 ─────────────────────────────────────────── */}
+      <section>
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-zinc-100" />
+          <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Part 0: Choose What to Build</span>
+          <div className="h-px flex-1 bg-zinc-100" />
+        </div>
+
+        <div className="bg-zinc-50 border border-zinc-200 rounded-2xl p-6">
+          <h3 className="text-base font-bold text-zinc-900 mb-3">Before you install anything, decide what you&apos;re building.</h3>
+          <p className="text-zinc-600 text-sm leading-relaxed mb-5">
+            This makes every step feel real. Think of one small daily annoyance. Write it in one sentence. Some ideas to get you started:
+          </p>
+          <ul className="space-y-3 mb-6">
+            {[
+              { icon: "🧳", title: "A packing list generator", desc: "enter your destination and it tells you what to bring" },
+              { icon: "✅", title: "A habit tracker", desc: "tick off daily habits and see your streak" },
+              { icon: "📝", title: "A meeting notes formatter", desc: "paste messy notes and get them cleaned up" },
+              { icon: "💰", title: "A price comparison tool", desc: "track prices of things you want to buy" },
+              { icon: "🧾", title: "A simple invoice generator", desc: "fill in your details and download a PDF" },
+            ].map(({ icon, title, desc }) => (
+              <li key={title} className="flex items-start gap-3">
+                <span className="text-base shrink-0 mt-0.5">{icon}</span>
+                <span className="text-sm text-zinc-700">
+                  <span className="font-semibold">{title}</span>
+                  <span className="text-zinc-500"> — {desc}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-sm font-bold text-zinc-900">Got your idea? Let&apos;s build it.</p>
+        </div>
+      </section>
+
       {/* ── PART 1 ─────────────────────────────────────────── */}
       <section>
         <div className="flex items-center gap-3 mb-8">
