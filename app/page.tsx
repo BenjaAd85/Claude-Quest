@@ -30,7 +30,7 @@ export default function Home() {
       number: 5,
       title: "Running Commands",
       description: "Use Claude Code to run terminal commands on your behalf without typing them yourself.",
-      status: "coming-soon",
+      status: "available",
     },
     {
       number: 6,
