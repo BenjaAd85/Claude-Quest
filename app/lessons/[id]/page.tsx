@@ -10,8 +10,8 @@ const lessons: Record<string, { title: string; description: string; content: str
     content: "",
   },
   "2": {
-    title: "Your First Build — From Idea to Live on the Internet",
-    description: "The best first project isn't impressive. It's useful.",
+    title: "Your First Build — From Zero to Live on the Internet",
+    description: "By the end of this lesson your app will be live at a real URL.",
     content: "",
   },
   "3": {
@@ -371,211 +371,594 @@ function Lesson1Content() {
   );
 }
 
+/* ─── Lesson 2 Illustrations ─────────────────────────────────── */
+
+function NodeJSIllustration() {
+  return (
+    <div className="bg-white border border-zinc-200 rounded-lg overflow-hidden text-xs">
+      <div className="flex items-center gap-1.5 px-3 py-2 bg-zinc-100 border-b border-zinc-200">
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <div className="ml-2 flex-1 bg-white border border-zinc-300 rounded px-2 py-0.5 text-[10px] text-zinc-500">nodejs.org</div>
+      </div>
+      <div className="p-5 font-sans">
+        <div className="flex items-center gap-2 mb-4">
+          <div className="w-7 h-7 rounded-full bg-green-600 flex items-center justify-center">
+            <span className="text-white text-[10px] font-bold">N</span>
+          </div>
+          <span className="font-bold text-zinc-800 text-sm">Node.js</span>
+        </div>
+        <div className="flex gap-3 items-start">
+          <div className="flex-1 border-2 border-green-500 rounded-lg p-3 relative">
+            <div className="text-[10px] text-green-700 font-semibold mb-1">Recommended For Most Users</div>
+            <div className="text-sm font-bold text-zinc-900 mb-2">20.11.0 LTS</div>
+            <div className="bg-green-500 text-white text-[10px] font-semibold px-3 py-1.5 rounded inline-block">
+              Download Node.js (LTS)
+            </div>
+          </div>
+          <div className="flex flex-col items-center gap-1 pt-4">
+            <div className="text-orange-500 font-bold text-base">←</div>
+            <div className="text-[9px] text-orange-500 font-semibold text-center leading-tight">click<br/>this</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function InstallConfirmIllustration() {
+  return (
+    <div className="bg-zinc-900 rounded-lg overflow-hidden text-xs font-mono">
+      <div className="flex items-center gap-1.5 px-3 py-2 bg-zinc-800 border-b border-zinc-700">
+        <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
+        <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+        <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
+        <span className="ml-2 text-zinc-500 text-[10px]">Terminal</span>
+      </div>
+      <div className="p-4 space-y-2">
+        <div className="flex gap-2">
+          <span className="text-orange-400">$</span>
+          <span className="text-zinc-300">sudo npm install -g @anthropic-ai/claude-code</span>
+        </div>
+        <div className="text-zinc-500">Password: <span className="tracking-widest">••••••••</span></div>
+        <div className="pt-1 space-y-1">
+          <div className="text-zinc-400">added 847 packages in 12s</div>
+          <div className="text-green-400">✓ claude 2.1.80 installed</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SplitScreenIllustration() {
+  return (
+    <div className="grid grid-cols-2 gap-3">
+      {/* Terminal side */}
+      <div className="bg-zinc-900 rounded-lg overflow-hidden text-xs font-mono">
+        <div className="flex items-center gap-1.5 px-3 py-2 bg-zinc-800 border-b border-zinc-700">
+          <span className="w-2 h-2 rounded-full bg-red-400" />
+          <span className="w-2 h-2 rounded-full bg-yellow-400" />
+          <span className="w-2 h-2 rounded-full bg-green-400" />
+          <span className="ml-1 text-zinc-500 text-[10px]">Terminal</span>
+        </div>
+        <div className="p-3 space-y-1.5">
+          <div className="flex gap-2">
+            <span className="text-orange-400">$</span>
+            <span className="text-zinc-300">npm run dev</span>
+          </div>
+          <div className="text-zinc-500 text-[10px]">▲ Next.js 15</div>
+          <div className="text-green-400 text-[10px]">✓ Ready on</div>
+          <div className="text-zinc-400 text-[10px] pl-2">localhost:3000</div>
+        </div>
+      </div>
+      {/* Browser side */}
+      <div className="bg-white border border-zinc-200 rounded-lg overflow-hidden text-xs font-sans">
+        <div className="flex items-center gap-1 px-2 py-2 bg-zinc-100 border-b border-zinc-200">
+          <span className="w-2 h-2 rounded-full bg-zinc-300" />
+          <span className="w-2 h-2 rounded-full bg-zinc-300" />
+          <span className="w-2 h-2 rounded-full bg-zinc-300" />
+          <div className="ml-1 flex-1 bg-white border border-zinc-300 rounded px-1.5 py-0.5 text-[9px] text-zinc-500">localhost:3000</div>
+        </div>
+        <div className="p-3 space-y-2">
+          <div className="h-2.5 bg-orange-400 rounded w-2/3" />
+          <div className="h-1.5 bg-zinc-200 rounded w-full" />
+          <div className="h-1.5 bg-zinc-200 rounded w-4/5" />
+          <div className="h-5 bg-orange-500 rounded w-16 mt-2" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GitHubNewRepoIllustration() {
+  return (
+    <div className="bg-white border border-zinc-200 rounded-lg overflow-hidden text-xs font-sans">
+      <div className="flex items-center gap-1.5 px-3 py-2 bg-zinc-100 border-b border-zinc-200">
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <div className="ml-2 flex-1 bg-white border border-zinc-300 rounded px-2 py-0.5 text-[10px] text-zinc-500">github.com/new</div>
+      </div>
+      <div className="p-4 space-y-3">
+        <div className="text-sm font-semibold text-zinc-800">Create a new repository</div>
+        <div>
+          <div className="text-[10px] text-zinc-500 mb-1">Repository name</div>
+          <div className="border border-blue-400 rounded px-2 py-1 text-[11px] text-zinc-800 bg-blue-50">my-first-app</div>
+        </div>
+        <div className="space-y-1.5">
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full border-2 border-blue-500 flex items-center justify-center">
+              <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+            </div>
+            <span className="text-[11px] text-zinc-700">Public</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded-full border-2 border-zinc-300" />
+            <span className="text-[11px] text-zinc-400">Private</span>
+          </div>
+        </div>
+        <div className="bg-green-600 text-white text-[11px] font-semibold px-3 py-1.5 rounded inline-block">
+          Create repository
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GitHubTokenIllustration() {
+  return (
+    <div className="bg-white border border-zinc-200 rounded-lg overflow-hidden text-xs font-sans">
+      <div className="flex items-center gap-1.5 px-3 py-2 bg-zinc-100 border-b border-zinc-200">
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <div className="ml-2 flex-1 bg-white border border-zinc-300 rounded px-2 py-0.5 text-[10px] text-zinc-500">github.com/settings/tokens</div>
+      </div>
+      <div className="p-4 space-y-3">
+        <div className="text-sm font-semibold text-zinc-800">New personal access token</div>
+        <div className="space-y-1.5">
+          <div className="text-[10px] font-semibold text-zinc-600 uppercase tracking-wide">Select scopes</div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded bg-blue-500 flex items-center justify-center">
+              <span className="text-white text-[8px] font-bold">✓</span>
+            </div>
+            <span className="text-[11px] font-mono text-zinc-800">repo</span>
+            <span className="text-[10px] text-zinc-400">Full control of repositories</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded border border-zinc-300" />
+            <span className="text-[11px] font-mono text-zinc-400">workflow</span>
+          </div>
+        </div>
+        <div className="border border-zinc-200 rounded overflow-hidden">
+          <div className="px-3 py-2 bg-zinc-50 font-mono text-[11px] text-zinc-400 blur-[2px] select-none">
+            ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          </div>
+          <div className="bg-red-500 text-white text-[10px] font-semibold px-3 py-1.5">
+            ⚠ Only shown once — copy now
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function VercelImportIllustration() {
+  return (
+    <div className="bg-white border border-zinc-200 rounded-lg overflow-hidden text-xs font-sans">
+      <div className="flex items-center gap-1.5 px-3 py-2 bg-zinc-100 border-b border-zinc-200">
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <div className="ml-2 flex-1 bg-white border border-zinc-300 rounded px-2 py-0.5 text-[10px] text-zinc-500">vercel.com/new</div>
+      </div>
+      <div className="p-4 space-y-3">
+        <div className="text-sm font-semibold text-zinc-800">Import Git Repository</div>
+        <div className="border border-zinc-200 rounded-lg divide-y divide-zinc-100">
+          {["my-first-app", "other-project", "old-repo"].map((repo, i) => (
+            <div key={repo} className="flex items-center justify-between px-3 py-2">
+              <div className="flex items-center gap-2">
+                <svg className="w-3 h-3 text-zinc-500" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 010-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9z"/>
+                </svg>
+                <span className={`text-[11px] ${i === 0 ? "text-zinc-800 font-medium" : "text-zinc-400"}`}>{repo}</span>
+              </div>
+              <div className={`text-[10px] font-semibold px-2.5 py-1 rounded ${i === 0 ? "bg-black text-white" : "bg-zinc-100 text-zinc-400"}`}>
+                Import
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function VercelSuccessIllustration() {
+  return (
+    <div className="bg-white border border-zinc-200 rounded-lg overflow-hidden text-xs font-sans">
+      <div className="flex items-center gap-1.5 px-3 py-2 bg-zinc-100 border-b border-zinc-200">
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <span className="w-2.5 h-2.5 rounded-full bg-zinc-300" />
+        <div className="ml-2 flex-1 bg-white border border-zinc-300 rounded px-2 py-0.5 text-[10px] text-zinc-500 flex items-center gap-1">
+          <svg className="w-2.5 h-2.5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          my-first-app.vercel.app
+        </div>
+      </div>
+      <div className="p-4 text-center space-y-2">
+        <div className="text-2xl">🎉</div>
+        <div className="font-bold text-zinc-800 text-sm">Congratulations!</div>
+        <div className="text-[11px] text-zinc-500">Your project has been deployed.</div>
+        <div className="inline-flex items-center gap-1.5 bg-green-100 text-green-700 text-[10px] font-semibold px-3 py-1.5 rounded-full">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+          Deployed
+        </div>
+        <div className="mt-2 border border-zinc-200 rounded px-3 py-1.5 text-[11px] font-mono text-orange-500">
+          my-first-app.vercel.app
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Lesson 2 Custom Content ────────────────────────────────── */
 
 function Lesson2Content() {
-  const steps: { number: string; title: string; body: React.ReactNode }[] = [
-    {
-      number: "1",
-      title: "Pick your annoyance",
-      body: (
-        <>
-          <p className="text-zinc-600 leading-relaxed mb-4">
-            Think of one small thing that wastes your time. Write it in one sentence. Examples:
-          </p>
-          <ul className="space-y-2">
-            {[
-              '"I always forget what to pack for trips"',
-              '"I want a simple place to track my daily habits"',
-              '"I spend too long formatting meeting notes"',
-            ].map((ex) => (
-              <li key={ex} className="flex items-start gap-2 text-zinc-500 text-sm">
-                <span className="text-orange-400 mt-0.5 shrink-0">•</span>
-                <span>{ex}</span>
-              </li>
-            ))}
-          </ul>
-        </>
-      ),
-    },
-    {
-      number: "2",
-      title: "Open Claude Code",
-      body: (
-        <>
-          <p className="text-zinc-600 leading-relaxed mb-4">Open Terminal and type:</p>
-          <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
-            <code className="text-green-400 text-sm font-mono flex-1 select-all">claude</code>
-            <CopyButton text="claude" />
-          </div>
-        </>
-      ),
-    },
-    {
-      number: "3",
-      title: "Describe what you want",
-      body: (
-        <>
-          <p className="text-zinc-600 leading-relaxed mb-5">Be specific.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
-            <div className="rounded-xl border border-red-200 bg-red-50 p-4">
-              <p className="text-red-500 text-xs font-semibold mb-2">❌ Weak prompt</p>
-              <p className="text-red-700 text-sm font-mono leading-relaxed">&ldquo;Make me an app&rdquo;</p>
-            </div>
-            <div className="rounded-xl border border-green-200 bg-green-50 p-4">
-              <p className="text-green-600 text-xs font-semibold mb-2">✅ Strong prompt</p>
-              <p className="text-green-800 text-sm font-mono leading-relaxed">&ldquo;Build me a simple packing list app. I enter my destination and trip length and it gives me a checklist of what to pack. It should work in the browser as a Next.js app.&rdquo;</p>
-            </div>
-          </div>
-        </>
-      ),
-    },
-    {
-      number: "4",
-      title: "Watch it build",
-      body: (
-        <>
-          <p className="text-zinc-600 leading-relaxed mb-4">
-            Claude Code will create files and work through a task list. Let it run. When it&apos;s done it will tell you how to view it locally.
-          </p>
-          <p className="text-zinc-600 leading-relaxed mb-4">To see it in your browser, run:</p>
-          <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-4">
-            <code className="text-green-400 text-sm font-mono flex-1 select-all">npm run dev</code>
-            <CopyButton text="npm run dev" />
-          </div>
-          <p className="text-zinc-600 text-sm">
-            Then open{" "}
-            <a href="http://localhost:3000" className="text-orange-500 hover:text-orange-600 font-mono text-xs">
-              http://localhost:3000
-            </a>
-          </p>
-        </>
-      ),
-    },
-    {
-      number: "5",
-      title: "Set up GitHub",
-      body: (
-        <>
-          <p className="text-zinc-600 leading-relaxed mb-4">
-            GitHub stores your project safely in the cloud. If you haven&apos;t already, create a free account and then create a new repository called the name of your project.
-          </p>
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-xs font-medium bg-zinc-900 text-white px-3 py-1.5 rounded-lg hover:bg-zinc-700 transition-colors mb-5"
-          >
-            github.com →
-          </a>
-          <p className="text-zinc-600 leading-relaxed mb-4">
-            Now connect your project to GitHub. In Claude Code type:
-          </p>
-          <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
-            <code className="text-green-400 text-sm font-mono flex-1 select-all">
-              Connect this project to GitHub and push all files
-            </code>
-            <CopyButton text="Connect this project to GitHub and push all files" />
-          </div>
-          <p className="text-zinc-500 text-sm mt-3">Claude Code will walk you through it.</p>
-        </>
-      ),
-    },
-    {
-      number: "6",
-      title: "Set up Vercel",
-      body: (
-        <>
-          <p className="text-zinc-600 leading-relaxed mb-4">
-            Vercel puts your app on the internet. Go to Vercel and sign up using your GitHub account — this connects both automatically.
-          </p>
-          <a
-            href="https://vercel.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block text-xs font-medium bg-zinc-900 text-white px-3 py-1.5 rounded-lg hover:bg-zinc-700 transition-colors mb-5"
-          >
-            vercel.com →
-          </a>
-          <p className="text-zinc-600 leading-relaxed">
-            Then click <span className="font-medium text-zinc-800">&ldquo;Add New Project&rdquo;</span>, find your GitHub repository, and click Deploy. Vercel builds and hosts your app in about 60 seconds.
-          </p>
-        </>
-      ),
-    },
-    {
-      number: "7",
-      title: "You're live",
-      body: (
-        <p className="text-zinc-600 leading-relaxed">
-          Vercel gives you a real URL like{" "}
-          <span className="font-mono text-sm text-zinc-800 bg-zinc-100 px-1.5 py-0.5 rounded">your-app.vercel.app</span>.
-          {" "}Send it to someone. That&apos;s a real app, built by you, live on the internet.
-        </p>
-      ),
-    },
-    {
-      number: "8",
-      title: "Make changes",
-      body: (
-        <>
-          <p className="text-zinc-600 leading-relaxed mb-4">
-            Every time you improve your app, just tell Claude Code in Terminal:
-          </p>
-          <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
-            <code className="text-green-400 text-sm font-mono flex-1 select-all">
-              Commit and push all changes to GitHub
-            </code>
-            <CopyButton text="Commit and push all changes to GitHub" />
-          </div>
-          <p className="text-zinc-500 text-sm mt-3">
-            Vercel detects the update and redeploys automatically. Your live site updates in seconds.
-          </p>
-        </>
-      ),
-    },
-  ];
-
   return (
-    <div className="space-y-12">
+    <div className="space-y-14">
 
       {/* Intro */}
       <div className="bg-orange-50 border border-orange-100 rounded-2xl p-6">
         <p className="text-orange-800 text-lg font-medium leading-relaxed">
-          Forget building the next big app. Fix something small that bugs you every day.
-        </p>
-        <p className="text-orange-700 text-sm mt-3 leading-relaxed">
-          By the end of this lesson your project will be live on the internet with a real URL.
+          By the end of this lesson your app will be live at a real URL.
         </p>
       </div>
 
-      {/* Steps */}
-      <div className="space-y-0">
-        {steps.map((step, i) => (
-          <div key={step.number} className="flex gap-4">
-            <div className="flex flex-col items-center shrink-0">
-              <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">
-                {step.number}
-              </div>
-              {i < steps.length - 1 && (
-                <div className="w-px flex-1 bg-zinc-100 mt-2" />
-              )}
+      {/* ── PART 1 ─────────────────────────────────────────── */}
+      <section>
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-zinc-100" />
+          <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Part 1: Install Everything</span>
+          <div className="h-px flex-1 bg-zinc-100" />
+        </div>
+
+        {/* Step 1 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">1</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 1 — Install Node.js</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">
+              Node.js is required to run Claude Code. Go to nodejs.org and click the green LTS button. Open the downloaded file and click Continue until it&apos;s done.
+            </p>
+            <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer"
+              className="inline-block text-xs font-medium bg-zinc-900 text-white px-3 py-1.5 rounded-lg hover:bg-zinc-700 transition-colors mb-5">
+              nodejs.org →
+            </a>
+            <NodeJSIllustration />
+            <p className="text-zinc-600 leading-relaxed mt-4 mb-3">To verify it worked, open Terminal and type:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">node --version</code>
+              <CopyButton text="node --version" />
             </div>
-            <div className="flex-1 pb-10">
-              <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">
-                Step {step.number} — {step.title}
-              </h3>
-              {step.body}
+            <p className="text-zinc-500 text-sm">You should see something like <code className="text-zinc-700 bg-zinc-100 px-1.5 py-0.5 rounded text-xs">v24.0.0</code></p>
+          </div>
+        </div>
+
+        {/* Step 2 */}
+        <div className="flex gap-4">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">2</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 2 — Install Claude Code</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">In Terminal, paste:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-4">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">sudo npm install -g @anthropic-ai/claude-code</code>
+              <CopyButton text="sudo npm install -g @anthropic-ai/claude-code" />
+            </div>
+            <p className="text-zinc-500 text-sm mb-5">It will ask for your Mac password. Type it and hit enter — you won&apos;t see the characters appear, that&apos;s normal.</p>
+            <InstallConfirmIllustration />
+            <p className="text-zinc-600 leading-relaxed mt-4 mb-3">To verify:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">claude --version</code>
+              <CopyButton text="claude --version" />
+            </div>
+            <p className="text-zinc-500 text-sm">You should see something like <code className="text-zinc-700 bg-zinc-100 px-1.5 py-0.5 rounded text-xs">2.1.80 (Claude Code)</code></p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PART 2 ─────────────────────────────────────────── */}
+      <section>
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-zinc-100" />
+          <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Part 2: Build Your First Project</span>
+          <div className="h-px flex-1 bg-zinc-100" />
+        </div>
+
+        {/* Step 3 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">3</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 3 — Create a project folder</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">In Terminal, paste:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">mkdir ~/my-first-app && cd ~/my-first-app</code>
+              <CopyButton text="mkdir ~/my-first-app && cd ~/my-first-app" />
+            </div>
+            <p className="text-zinc-500 text-sm">This creates a folder called <code className="text-zinc-700 bg-zinc-100 px-1.5 py-0.5 rounded text-xs">my-first-app</code> and opens it.</p>
+          </div>
+        </div>
+
+        {/* Step 4 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">4</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 4 — Launch Claude Code</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">Type:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">claude</code>
+              <CopyButton text="claude" />
+            </div>
+            <p className="text-zinc-500 text-sm mt-3">You&apos;ll see the Claude Code prompt appear.</p>
+          </div>
+        </div>
+
+        {/* Step 5 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">5</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 5 — Describe what you want</h3>
+            <p className="text-zinc-600 leading-relaxed mb-5">Be specific. Here&apos;s the difference it makes:</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+                <p className="text-red-500 text-xs font-semibold mb-3">❌ Weak prompt</p>
+                <p className="text-red-700 text-sm font-mono leading-relaxed">&ldquo;Make me an app&rdquo;</p>
+              </div>
+              <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+                <p className="text-green-600 text-xs font-semibold mb-3">✅ Strong prompt</p>
+                <p className="text-green-800 text-sm font-mono leading-relaxed">&ldquo;Build me a simple packing list app as a Next.js web app. I enter my destination and trip length and it gives me a checklist of what to pack.&rdquo;</p>
+              </div>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+
+        {/* Step 6 */}
+        <div className="flex gap-4">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">6</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 6 — View your app locally</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">Open a new Terminal window and run:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-5">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">npm run dev</code>
+              <CopyButton text="npm run dev" />
+            </div>
+            <SplitScreenIllustration />
+            <p className="text-zinc-600 text-sm mt-4">
+              Then open your browser and go to{" "}
+              <a href="http://localhost:3000" className="text-orange-500 hover:text-orange-600 font-mono text-xs">http://localhost:3000</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PART 3 ─────────────────────────────────────────── */}
+      <section>
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-zinc-100" />
+          <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Part 3: Put It on GitHub</span>
+          <div className="h-px flex-1 bg-zinc-100" />
+        </div>
+
+        {/* Step 7 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">7</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 7 — Create a GitHub account</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">Go to GitHub and sign up for a free account.</p>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+              className="inline-block text-xs font-medium bg-zinc-900 text-white px-3 py-1.5 rounded-lg hover:bg-zinc-700 transition-colors">
+              github.com →
+            </a>
+          </div>
+        </div>
+
+        {/* Step 8 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">8</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 8 — Create a new repository</h3>
+            <p className="text-zinc-600 leading-relaxed mb-5">
+              Click <span className="font-medium text-zinc-800">New repository</span>. Fill in the repository name, choose Public or Private, click Create repository.
+            </p>
+            <GitHubNewRepoIllustration />
+          </div>
+        </div>
+
+        {/* Step 9 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">9</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 9 — Create a GitHub access token</h3>
+            <a href="https://github.com/settings/tokens/new" target="_blank" rel="noopener noreferrer"
+              className="inline-block text-xs font-medium bg-zinc-900 text-white px-3 py-1.5 rounded-lg hover:bg-zinc-700 transition-colors mb-5">
+              github.com/settings/tokens/new →
+            </a>
+            <div className="text-zinc-600 text-sm leading-relaxed mb-5 space-y-1">
+              <p>Fill in: <span className="font-medium text-zinc-800">Note:</span> my-first-app</p>
+              <p><span className="font-medium text-zinc-800">Expiration:</span> 90 days</p>
+              <p>Tick the <code className="bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded text-xs">repo</code> checkbox. Click <span className="font-medium text-zinc-800">Generate token</span>.</p>
+            </div>
+            <GitHubTokenIllustration />
+            {/* Warning box */}
+            <div className="mt-4 flex items-start gap-3 bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-3">
+              <span className="text-yellow-500 text-base shrink-0">⚠️</span>
+              <p className="text-yellow-800 text-sm font-medium">
+                Copy your token immediately — GitHub only shows it once. Paste it into Notes.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Step 10 */}
+        <div className="flex gap-4">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">10</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 10 — Push your project to GitHub</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">Run these one at a time:</p>
+            {[
+              "git init",
+              "git add .",
+              'git commit -m "first commit"',
+              "git branch -M main",
+            ].map((cmd) => (
+              <div key={cmd} className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-2">
+                <code className="text-green-400 text-sm font-mono flex-1 select-all">{cmd}</code>
+                <CopyButton text={cmd} />
+              </div>
+            ))}
+            <p className="text-zinc-600 text-sm mt-5 mb-3">
+              Then replace <code className="bg-zinc-100 text-zinc-700 px-1 rounded text-xs">YOUR_USERNAME</code>,{" "}
+              <code className="bg-zinc-100 text-zinc-700 px-1 rounded text-xs">YOUR_TOKEN</code> and{" "}
+              <code className="bg-zinc-100 text-zinc-700 px-1 rounded text-xs">YOUR_REPO_NAME</code>:
+            </p>
+            <div className="flex items-start gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-2">
+              <code className="text-green-400 text-sm font-mono flex-1 leading-relaxed select-all">
+                git remote add origin https://YOUR_USERNAME:YOUR_TOKEN@github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+              </code>
+              <CopyButton text="git remote add origin https://YOUR_USERNAME:YOUR_TOKEN@github.com/YOUR_USERNAME/YOUR_REPO_NAME.git" />
+            </div>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">git push -u origin main</code>
+              <CopyButton text="git push -u origin main" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PART 4 ─────────────────────────────────────────── */}
+      <section>
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-zinc-100" />
+          <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Part 4: Make It Live</span>
+          <div className="h-px flex-1 bg-zinc-100" />
+        </div>
+
+        {/* Step 11 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">11</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 11 — Create a Vercel account</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">
+              Go to Vercel and click Sign Up. Choose <span className="font-medium text-zinc-800">Continue with GitHub</span>.
+            </p>
+            <a href="https://vercel.com" target="_blank" rel="noopener noreferrer"
+              className="inline-block text-xs font-medium bg-zinc-900 text-white px-3 py-1.5 rounded-lg hover:bg-zinc-700 transition-colors">
+              vercel.com →
+            </a>
+          </div>
+        </div>
+
+        {/* Step 12 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">12</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 12 — Import your project</h3>
+            <p className="text-zinc-600 leading-relaxed mb-5">
+              Click <span className="font-medium text-zinc-800">Add New Project</span> then Import. Find your repository and click Import. Leave settings as default and click Deploy.
+            </p>
+            <VercelImportIllustration />
+          </div>
+        </div>
+
+        {/* Step 13 */}
+        <div className="flex gap-4">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">13</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 13 — You&apos;re live</h3>
+            <p className="text-zinc-600 leading-relaxed mb-5">
+              Vercel gives you a real URL like{" "}
+              <span className="font-mono text-sm text-zinc-800 bg-zinc-100 px-1.5 py-0.5 rounded">your-app.vercel.app</span>.
+              {" "}Open it. Share it.
+            </p>
+            <VercelSuccessIllustration />
+          </div>
+        </div>
+      </section>
+
+      {/* ── PART 5 ─────────────────────────────────────────── */}
+      <section>
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-zinc-100" />
+          <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Part 5: Making Updates</span>
+          <div className="h-px flex-1 bg-zinc-100" />
+        </div>
+
+        {/* Step 14 */}
+        <div className="flex gap-4">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">14</div>
+          </div>
+          <div className="flex-1 pb-2">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 14 — How to update your live app</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">
+              Tell Claude Code what to change. When happy, type:
+            </p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">Commit and push all changes to GitHub</code>
+              <CopyButton text="Commit and push all changes to GitHub" />
+            </div>
+            <p className="text-zinc-500 text-sm">Vercel redeploys automatically.</p>
+          </div>
+        </div>
+      </section>
 
       {/* Key Takeaway */}
       <div className="bg-orange-500 rounded-2xl p-6 text-white">
         <p className="text-sm font-semibold text-orange-200 uppercase tracking-wide mb-2">Key Takeaway</p>
         <p className="text-lg font-semibold leading-relaxed">
-          Describe it → Claude Code builds it → Push to GitHub → Vercel makes it live. That&apos;s the complete loop. You&apos;ll use it for every project from here.
+          Describe it → Claude Code builds it → GitHub stores it → Vercel makes it live. This is the loop you&apos;ll use for every project.
         </p>
       </div>
 
