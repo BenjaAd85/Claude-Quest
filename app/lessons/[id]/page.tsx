@@ -9,9 +9,14 @@ const lessons: Record<string, { title: string; description: string; content: str
     content: "",
   },
   "2": {
-    title: "Your First Prompt",
-    description: "Ask Claude Code to create a file and see how it responds.",
-    content: "The best way to get started with Claude Code is to just ask it to do something simple. Try asking it to create a new file, write a function, or explain a piece of code.\n\nFor example, you could type: \"Create a file called hello.txt with the message Hello, world!\" and Claude Code will do exactly that — no need to remember any commands.",
+    title: "Your First Build — Solve Something Annoying",
+    description: "The best first project isn't impressive. It's useful.",
+    content: "",
+  },
+  "3": {
+    title: "Coming Soon",
+    description: "The next lesson is on its way.",
+    content: "Check back soon for Lesson 3.",
   },
 };
 
@@ -365,6 +370,168 @@ function Lesson1Content() {
   );
 }
 
+/* ─── Lesson 2 Custom Content ────────────────────────────────── */
+
+function Lesson2Content() {
+  const steps = [
+    {
+      number: "1",
+      title: "Pick your annoyance",
+      body: (
+        <>
+          <p className="text-zinc-600 leading-relaxed mb-4">
+            Think of one small thing in your daily life or work that wastes your time. It doesn&apos;t need to be technical. Examples:
+          </p>
+          <ul className="space-y-2 mb-2">
+            {[
+              "\"I always forget what I need to pack for trips\"",
+              "\"I spend too long formatting my meeting notes\"",
+              "\"I want to track my daily habits somewhere simple\"",
+            ].map((ex) => (
+              <li key={ex} className="flex items-start gap-2 text-zinc-500 text-sm">
+                <span className="text-orange-400 mt-0.5">•</span>
+                <span>{ex}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-zinc-600 text-sm mt-4 font-medium">Got one? Write it down in one sentence.</p>
+        </>
+      ),
+    },
+    {
+      number: "2",
+      title: "Open Claude Code",
+      body: (
+        <>
+          <p className="text-zinc-600 leading-relaxed mb-4">Open Terminal and type:</p>
+          <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-4">
+            <code className="text-green-400 text-sm font-mono flex-1 select-all">claude</code>
+            <CopyButton text="claude" />
+          </div>
+          <p className="text-zinc-600 leading-relaxed">Hit enter. You&apos;ll see the Claude Code prompt appear.</p>
+        </>
+      ),
+    },
+    {
+      number: "3",
+      title: "Describe what you want",
+      body: (
+        <>
+          <p className="text-zinc-600 leading-relaxed mb-6">
+            Type your idea in plain English. Be specific.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            {/* Weak prompt */}
+            <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-red-500 text-sm font-semibold">✕ Weak prompt</span>
+              </div>
+              <p className="text-red-700 text-sm font-mono leading-relaxed">&ldquo;Make me an app&rdquo;</p>
+            </div>
+            {/* Strong prompt */}
+            <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-green-600 text-sm font-semibold">✓ Strong prompt</span>
+              </div>
+              <p className="text-green-800 text-sm font-mono leading-relaxed">&ldquo;Build me a simple packing list app. I enter my destination and trip length, and it gives me a checklist of what to pack. It should work in the browser.&rdquo;</p>
+            </div>
+          </div>
+          <p className="text-zinc-500 text-sm">The more specific you are, the better the result.</p>
+        </>
+      ),
+    },
+    {
+      number: "4",
+      title: "Watch it build",
+      body: (
+        <p className="text-zinc-600 leading-relaxed">
+          Claude Code will start creating files. You&apos;ll see it working through a list of tasks. This takes a few minutes — let it run.
+          <br /><br />
+          When it&apos;s done it will tell you how to view it.
+        </p>
+      ),
+    },
+    {
+      number: "5",
+      title: "If you get stuck, just ask",
+      body: (
+        <>
+          <p className="text-zinc-600 leading-relaxed mb-4">
+            If Claude Code says something confusing, type exactly this:
+          </p>
+          <div className="flex items-start gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-4">
+            <code className="text-green-400 text-sm font-mono flex-1 leading-relaxed select-all">
+              I don&apos;t understand. Can you explain what I need to do next in simple terms?
+            </code>
+            <CopyButton text="I don't understand. Can you explain what I need to do next in simple terms?" />
+          </div>
+          <p className="text-zinc-600 text-sm leading-relaxed">
+            That&apos;s the biggest unlock. You never have to google anything — just ask.
+          </p>
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <div className="space-y-12">
+
+      {/* Intro */}
+      <div className="bg-orange-50 border border-orange-100 rounded-2xl p-6">
+        <p className="text-orange-800 text-lg font-medium leading-relaxed">
+          Forget building the next big app. The best way to learn Claude Code is to fix something small that bugs you every day.
+        </p>
+        <p className="text-orange-700 text-sm mt-3 leading-relaxed">
+          A folder that&apos;s always a mess. A repetitive task at work. A form you fill out over and over. Something that makes you think &ldquo;there has to be a better way.&rdquo; That&apos;s your first project.
+        </p>
+      </div>
+
+      {/* Steps */}
+      <div className="space-y-6">
+        {steps.map((step, i) => (
+          <div key={step.number} className="flex gap-4">
+            {/* Number + connector */}
+            <div className="flex flex-col items-center shrink-0">
+              <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">
+                {step.number}
+              </div>
+              {i < steps.length - 1 && (
+                <div className="w-px flex-1 bg-zinc-100 mt-2" />
+              )}
+            </div>
+            {/* Content */}
+            <div className="flex-1 pb-8">
+              <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">
+                Step {step.number} — {step.title}
+              </h3>
+              {step.body}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Key Takeaway */}
+      <div className="bg-orange-500 rounded-2xl p-6 text-white">
+        <p className="text-sm font-semibold text-orange-200 uppercase tracking-wide mb-2">Key Takeaway</p>
+        <p className="text-lg font-semibold leading-relaxed">
+          Your first prompt doesn&apos;t need to be perfect. Start specific, watch it build, then improve from there. That loop — describe, build, tweak — is the whole skill.
+        </p>
+      </div>
+
+      {/* Next lesson button */}
+      <div className="flex justify-end">
+        <Link
+          href="/lessons/3"
+          className="inline-flex items-center gap-2 bg-zinc-900 text-white text-sm font-semibold px-5 py-3 rounded-xl hover:bg-zinc-700 transition-colors"
+        >
+          Next: Lesson 3 →
+        </Link>
+      </div>
+
+    </div>
+  );
+}
+
 /* ─── Page ───────────────────────────────────────────────────── */
 
 export default async function LessonPage({ params }: { params: Promise<{ id: string }> }) {
@@ -409,6 +576,8 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
         {/* Lesson-specific content */}
         {id === "1" ? (
           <Lesson1Content />
+        ) : id === "2" ? (
+          <Lesson2Content />
         ) : (
           <div className="prose prose-zinc max-w-none">
             {lesson.content.split("\n\n").map((paragraph, i) => (
