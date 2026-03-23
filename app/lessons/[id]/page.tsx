@@ -25,9 +25,14 @@ const lessons: Record<string, { title: string; description: string; content: str
     content: "",
   },
   "5": {
+    title: "Running Commands",
+    description: "You never have to memorise a terminal command again.",
+    content: "",
+  },
+  "6": {
     title: "Coming Soon",
     description: "The next lesson is on its way.",
-    content: "Check back soon for Lesson 5.",
+    content: "Check back soon for Lesson 6.",
   },
 };
 
@@ -2046,6 +2051,423 @@ function Lesson4Content() {
   );
 }
 
+/* ─── Lesson 5 Custom Content ────────────────────────────────── */
+
+function Lesson5Content() {
+  return (
+    <div className="space-y-14">
+
+      {/* ── PART 1 ─────────────────────────────────────────── */}
+      <section>
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-zinc-100" />
+          <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Part 1: The Essential Commands</span>
+          <div className="h-px flex-1 bg-zinc-100" />
+        </div>
+
+        {/* Step 1 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">1</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 1 - Start Claude Code</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">Navigate to your project and launch Claude Code:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-2">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">cd ~/my-first-app</code>
+              <CopyButton text="cd ~/my-first-app" />
+            </div>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">claude</code>
+              <CopyButton text="claude" />
+            </div>
+          </div>
+        </div>
+
+        {/* Step 2 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">2</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 2 - Continue where you left off</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">Pick up from your last session:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-4">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">claude -c</code>
+              <CopyButton text="claude -c" />
+            </div>
+            <div className="flex items-start gap-3 bg-blue-50 border border-blue-200 rounded-xl px-4 py-3">
+              <span className="text-blue-500 text-base shrink-0 mt-0.5">ℹ</span>
+              <div className="text-blue-800 text-sm leading-relaxed">
+                <span className="font-semibold">What does -c do?</span> The <code className="bg-blue-100 px-1 rounded text-xs font-mono">-c</code> flag tells Claude Code to resume the most recent conversation in your current folder. No need to re-explain your project every time.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Step 3 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">3</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 3 - Run a quick one-off task</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">If you just want Claude Code to do one thing and exit:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-2">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">claude &quot;fix the build error&quot;</code>
+              <CopyButton text='claude "fix the build error"' />
+            </div>
+            <p className="text-zinc-500 text-sm my-3">or</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">claude -p &quot;explain what this project does&quot;</code>
+              <CopyButton text='claude -p "explain what this project does"' />
+            </div>
+            <p className="text-zinc-500 text-sm">The <code className="bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded text-xs font-mono">-p</code> flag runs a single query and exits immediately.</p>
+          </div>
+        </div>
+
+        {/* Step 4 */}
+        <div className="flex gap-4">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">4</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 4 - Exit Claude Code</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">When you are done:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-2">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">exit</code>
+              <CopyButton text="exit" />
+            </div>
+            <p className="text-zinc-500 text-sm mt-3">
+              or press <kbd className="bg-zinc-100 border border-zinc-300 rounded px-1.5 py-0.5 text-xs font-mono text-zinc-700">Ctrl</kbd> and <kbd className="bg-zinc-100 border border-zinc-300 rounded px-1.5 py-0.5 text-xs font-mono text-zinc-700">C</kbd> at the same time.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PART 2 ─────────────────────────────────────────── */}
+      <section>
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-zinc-100" />
+          <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Part 2: Asking Claude Code to Run Things for You</span>
+          <div className="h-px flex-1 bg-zinc-100" />
+        </div>
+
+        {/* Step 5 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">5</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 5 - Start your app</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">Instead of typing <code className="bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded text-xs font-mono">npm run dev</code> yourself, tell Claude Code:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">Start the app locally</code>
+              <CopyButton text="Start the app locally" />
+            </div>
+            <p className="text-zinc-500 text-sm mt-3">Claude Code will run the correct command and tell you what URL to open.</p>
+          </div>
+        </div>
+
+        {/* Step 6 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">6</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 6 - Install a package</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">Describe what you need:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">Install the package needed to add charts to my app</code>
+              <CopyButton text="Install the package needed to add charts to my app" />
+            </div>
+            <p className="text-zinc-500 text-sm mt-3">Claude Code will figure out the correct package name and install it.</p>
+          </div>
+        </div>
+
+        {/* Step 7 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">7</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 7 - Check what you changed</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">Ask:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">What files have I changed?</code>
+              <CopyButton text="What files have I changed?" />
+            </div>
+            <p className="text-zinc-500 text-sm mt-3">Claude Code runs <code className="bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded text-xs font-mono">git status</code> behind the scenes and gives you a plain English summary.</p>
+          </div>
+        </div>
+
+        {/* Step 8 */}
+        <div className="flex gap-4">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">8</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 8 - Commit and push in one step</h3>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">Commit my changes with a descriptive message and push to GitHub</code>
+              <CopyButton text="Commit my changes with a descriptive message and push to GitHub" />
+            </div>
+            <p className="text-zinc-500 text-sm mt-3">Claude Code stages the files, writes a commit message, commits, and pushes. All in one go.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PART 3 ─────────────────────────────────────────── */}
+      <section>
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-zinc-100" />
+          <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Part 3: Slash Commands</span>
+          <div className="h-px flex-1 bg-zinc-100" />
+        </div>
+
+        {/* Step 9 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">9</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 9 - See all available commands</h3>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-4">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">/help</code>
+              <CopyButton text="/help" />
+            </div>
+            <div className="flex items-start gap-3 bg-blue-50 border border-blue-200 rounded-xl px-4 py-3">
+              <span className="text-blue-500 text-base shrink-0 mt-0.5">ℹ</span>
+              <div className="text-blue-800 text-sm leading-relaxed">
+                <span className="font-semibold">What are slash commands?</span> Slash commands are built-in shortcuts that start with <code className="bg-blue-100 px-1 rounded text-xs font-mono">/</code>. They control Claude Code itself rather than asking it to do something. Type <code className="bg-blue-100 px-1 rounded text-xs font-mono">/help</code> at any time to see the full list.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Step 10 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">10</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 10 - Clear the conversation</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">If a session has gone on too long and Claude Code seems confused:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-4">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">/clear</code>
+              <CopyButton text="/clear" />
+            </div>
+            <div className="flex items-start gap-3 bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-3">
+              <span className="text-yellow-500 text-base shrink-0">⚠️</span>
+              <p className="text-yellow-800 text-sm font-medium">
+                This resets the conversation without closing Claude Code. Your files are completely untouched.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Step 11 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">11</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 11 - Create project memory</h3>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">/init</code>
+              <CopyButton text="/init" />
+            </div>
+            <p className="text-zinc-500 text-sm mt-3">Creates a CLAUDE.md file so Claude Code remembers your project across sessions. Covered in detail in Lesson 4.</p>
+          </div>
+        </div>
+
+        {/* Step 12 */}
+        <div className="flex gap-4">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">12</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 12 - Check Claude Code is working properly</h3>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">/doctor</code>
+              <CopyButton text="/doctor" />
+            </div>
+            <p className="text-zinc-500 text-sm mt-3">Claude Code will check its own installation and tell you if anything needs fixing.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PART 4 ─────────────────────────────────────────── */}
+      <section>
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-zinc-100" />
+          <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Part 4: Git Commands Made Easy</span>
+          <div className="h-px flex-1 bg-zinc-100" />
+        </div>
+
+        {/* Step 13 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">13</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 13 - Create a new branch</h3>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">Create a new branch called feature/dark-mode</code>
+              <CopyButton text="Create a new branch called feature/dark-mode" />
+            </div>
+          </div>
+        </div>
+
+        {/* Step 14 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">14</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 14 - See recent changes</h3>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">Show me the last 5 commits</code>
+              <CopyButton text="Show me the last 5 commits" />
+            </div>
+          </div>
+        </div>
+
+        {/* Step 15 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">15</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 15 - Undo a mistake</h3>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">Undo the last change I made to the homepage file</code>
+              <CopyButton text="Undo the last change I made to the homepage file" />
+            </div>
+            <p className="text-zinc-500 text-sm mt-3">Claude Code will figure out the right git command and ask for your approval before doing anything.</p>
+          </div>
+        </div>
+
+        {/* Step 16 */}
+        <div className="flex gap-4">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">16</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 16 - Push everything live</h3>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3 mb-4">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">Commit and push all changes to GitHub</code>
+              <CopyButton text="Commit and push all changes to GitHub" />
+            </div>
+            <div className="flex items-start gap-3 bg-green-50 border border-green-200 rounded-xl px-4 py-3">
+              <span className="text-green-500 text-base shrink-0">✓</span>
+              <p className="text-green-800 text-sm font-medium">
+                Vercel picks this up automatically. Your live site updates within 60 seconds.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PART 5 ─────────────────────────────────────────── */}
+      <section>
+        <div className="flex items-center gap-3 mb-8">
+          <div className="h-px flex-1 bg-zinc-100" />
+          <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">Part 5: Pro Tips</span>
+          <div className="h-px flex-1 bg-zinc-100" />
+        </div>
+
+        {/* Step 17 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">17</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 17 - Be specific for better results</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="rounded-xl border border-red-200 bg-red-50 p-4">
+                <p className="text-red-500 text-xs font-semibold mb-3">❌ Vague</p>
+                <p className="text-red-700 text-sm font-mono">&ldquo;fix the bug&rdquo;</p>
+              </div>
+              <div className="rounded-xl border border-green-200 bg-green-50 p-4">
+                <p className="text-green-600 text-xs font-semibold mb-3">✅ Specific</p>
+                <p className="text-green-800 text-sm font-mono leading-relaxed">&ldquo;fix the bug where users can submit the form with empty fields&rdquo;</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Step 18 */}
+        <div className="flex gap-4 mb-10">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">18</div>
+            <div className="w-px flex-1 bg-zinc-100 mt-2" />
+          </div>
+          <div className="flex-1 pb-10">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 18 - Break big tasks into steps</h3>
+            <p className="text-zinc-600 leading-relaxed mb-4">Instead of one big request, give Claude Code a numbered list:</p>
+            <div className="flex items-start gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-sm font-mono flex-1 leading-relaxed select-all whitespace-pre-line">{`1. Add a dark mode toggle to the navigation bar\n2. Make sure it saves the user preference\n3. Test that it works on mobile too`}</code>
+              <CopyButton text={"1. Add a dark mode toggle to the navigation bar\n2. Make sure it saves the user preference\n3. Test that it works on mobile too"} />
+            </div>
+          </div>
+        </div>
+
+        {/* Step 19 */}
+        <div className="flex gap-4">
+          <div className="flex flex-col items-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-orange-500 text-white text-sm font-bold flex items-center justify-center">19</div>
+          </div>
+          <div className="flex-1 pb-2">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3 mt-1">Step 19 - Ask Claude Code what it can do</h3>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-sm font-mono flex-1 select-all">Can you help me set up automated testing for my app?</code>
+              <CopyButton text="Can you help me set up automated testing for my app?" />
+            </div>
+            <p className="text-zinc-500 text-sm mt-3">Claude Code will tell you what is possible and how to approach it.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Key Takeaway */}
+      <div className="bg-orange-500 rounded-2xl p-6 text-white">
+        <p className="text-sm font-semibold text-orange-200 uppercase tracking-wide mb-2">Key Takeaway</p>
+        <p className="text-lg font-semibold leading-relaxed">
+          You do not need to memorise terminal commands. Describe what you want in plain English and Claude Code handles the rest. The only commands worth memorising are <code className="bg-orange-400 px-1.5 py-0.5 rounded text-sm">claude</code> to start, <code className="bg-orange-400 px-1.5 py-0.5 rounded text-sm">/clear</code> when confused, and &ldquo;Commit and push all changes to GitHub&rdquo; to save your work.
+        </p>
+      </div>
+
+      {/* Next lesson button */}
+      <div className="flex justify-end">
+        <Link
+          href="/lessons/6"
+          className="inline-flex items-center gap-2 bg-zinc-900 text-white text-sm font-semibold px-5 py-3 rounded-xl hover:bg-zinc-700 transition-colors"
+        >
+          Next: Lesson 6 →
+        </Link>
+      </div>
+
+    </div>
+  );
+}
+
 /* ─── Page ───────────────────────────────────────────────────── */
 
 export default async function LessonPage({ params }: { params: Promise<{ id: string }> }) {
@@ -2096,6 +2518,8 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
           <Lesson3Content />
         ) : id === "4" ? (
           <Lesson4Content />
+        ) : id === "5" ? (
+          <Lesson5Content />
         ) : (
           <div className="prose prose-zinc max-w-none">
             {lesson.content.split("\n\n").map((paragraph, i) => (
