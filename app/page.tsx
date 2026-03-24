@@ -1,130 +1,219 @@
 import Link from "next/link";
 
-export default function Home() {
-  const lessons = [
-    {
-      number: 1,
-      title: "What is Claude Code?",
-      description: "Learn what Claude Code is, what GitHub and Vercel do, and how they work together.",
-      status: "available",
-    },
-    {
-      number: 2,
-      title: "Your First Build",
-      description: "Choose what to build, install everything, and get your first app live on the internet.",
-      status: "available",
-    },
-    {
-      number: 3,
-      title: "When Things Break",
-      description: "Learn how to read errors, get unstuck, and never lose your progress.",
-      status: "available",
-    },
-    {
-      number: 4,
-      title: "Reading and Editing Files",
-      description: "Learn how Claude Code reads your project and makes precise changes across multiple files.",
-      status: "available",
-    },
-    {
-      number: 5,
-      title: "Running Commands",
-      description: "Use Claude Code to run terminal commands on your behalf without typing them yourself.",
-      status: "available",
-    },
-    {
-      number: 6,
-      title: "Debugging with Claude",
-      description: "Walk through a broken app and fix it together with Claude Code step by step.",
-      status: "available",
-    },
-    {
-      number: 7,
-      title: "How to Write Better Prompts",
-      description: "Small changes to how you describe things lead to dramatically better results.",
-      status: "available",
-    },
-    {
-      number: 8,
-      title: "How to Plan Bigger Projects",
-      description: "How to structure a real project so Claude Code builds exactly what you want.",
-      status: "available",
-    },
-  ];
+const missions = [
+  {
+    number: 1,
+    title: "What is Claude Code?",
+    description: "Learn what Claude Code is, what GitHub and Vercel do, and how they work together.",
+    xp: 100,
+  },
+  {
+    number: 2,
+    title: "Your First Build",
+    description: "Choose what to build, install everything, and get your first app live on the internet.",
+    xp: 100,
+  },
+  {
+    number: 3,
+    title: "When Things Break",
+    description: "Learn how to read errors, get unstuck, and never lose your progress.",
+    xp: 100,
+  },
+  {
+    number: 4,
+    title: "Reading and Editing Files",
+    description: "Learn how Claude Code reads your project and makes precise changes across multiple files.",
+    xp: 100,
+  },
+  {
+    number: 5,
+    title: "Running Commands",
+    description: "Use Claude Code to run terminal commands on your behalf without typing them yourself.",
+    xp: 100,
+  },
+  {
+    number: 6,
+    title: "Debugging with Claude",
+    description: "Walk through a broken app and fix it together with Claude Code step by step.",
+    xp: 100,
+  },
+  {
+    number: 7,
+    title: "How to Write Better Prompts",
+    description: "Small changes to how you describe things lead to dramatically better results.",
+    xp: 100,
+  },
+  {
+    number: 8,
+    title: "How to Plan Bigger Projects",
+    description: "How to structure a real project so Claude Code builds exactly what you want.",
+    xp: 100,
+  },
+];
 
+export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
-      {/* Header */}
-      <header className="border-b border-orange-100 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+    <div className="min-h-screen" style={{ background: "#060e20", color: "#dee5ff" }}>
+
+      {/* ── Nav ─────────────────────────────────────────────────── */}
+      <header
+        className="sticky top-0 z-20 backdrop-blur-md"
+        style={{
+          background: "rgba(6, 14, 32, 0.85)",
+          borderBottom: "1px solid rgba(204, 151, 255, 0.2)",
+        }}
+      >
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-2xl">⚔️</span>
-            <span className="font-bold text-xl text-orange-600">Claude Quest</span>
+            <span style={{ color: "#cc97ff", fontWeight: 700, fontSize: "0.95rem" }}>›</span>
+            <span
+              style={{
+                fontFamily: "var(--font-space-grotesk), Space Grotesk, sans-serif",
+                fontWeight: 700,
+                fontSize: "1.1rem",
+                color: "#cc97ff",
+                letterSpacing: "0.05em",
+              }}
+            >
+              CLAUDE_QUEST
+            </span>
           </div>
-          <span className="text-sm text-zinc-500">Beginner&apos;s Guide to Claude Code</span>
+          <div
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-semibold"
+            style={{ background: "#192540", color: "#6bff8f" }}
+          >
+            <span>⚡</span>
+            <span>0 XP</span>
+          </div>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="max-w-4xl mx-auto px-6 py-20 text-center">
-        <div className="inline-block bg-orange-100 text-orange-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-          Interactive Learning
-        </div>
-        <h1 className="text-5xl font-bold text-zinc-900 mb-6 leading-tight">
-          Master Claude Code,<br />one quest at a time.
-        </h1>
-        <p className="text-xl text-zinc-500 max-w-2xl mx-auto mb-10">
-          Claude Quest is a hands-on learning platform for beginners. Complete short lessons, run real commands, and level up your AI-assisted coding skills.
-        </p>
-        <a
-          href="#lessons"
-          className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-4 rounded-full transition-colors text-lg"
+      {/* ── Hero ────────────────────────────────────────────────── */}
+      <section className="max-w-4xl mx-auto px-6 py-24 text-center">
+        <p
+          className="uppercase tracking-widest text-sm mb-5"
+          style={{ color: "#a3aac4", letterSpacing: "0.2em" }}
         >
-          Start Learning →
-        </a>
+          Mission Briefing
+        </p>
+        <h1
+          className="text-5xl font-bold mb-6 leading-tight"
+          style={{
+            fontFamily: "var(--font-space-grotesk), Space Grotesk, sans-serif",
+            color: "#dee5ff",
+          }}
+        >
+          Master Claude Code,<br />one mission at a time.
+        </h1>
+        <p className="text-xl max-w-2xl mx-auto mb-10" style={{ color: "#a3aac4" }}>
+          Claude Quest is a hands-on training program for builders. Complete missions,
+          earn XP, and become a Claude Code power user.
+        </p>
+        <Link
+          href="/lessons/1"
+          className="inline-flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full text-lg transition-all hover:scale-105"
+          style={{
+            background: "linear-gradient(135deg, #cc97ff, #9c48ea)",
+            boxShadow: "0 0 0 rgba(204,151,255,0)",
+            transition: "box-shadow 0.2s, transform 0.2s",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 0 24px rgba(204,151,255,0.45)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 0 0 rgba(204,151,255,0)";
+          }}
+        >
+          Start Mission 1 →
+        </Link>
       </section>
 
-      {/* Lessons */}
-      <section id="lessons" className="max-w-4xl mx-auto px-6 pb-24">
-        <h2 className="text-2xl font-bold text-zinc-800 mb-8">Lessons</h2>
-        <div className="flex flex-col gap-4">
-          {lessons.map((lesson) => (
+      {/* ── Mission Board ────────────────────────────────────────── */}
+      <section className="max-w-4xl mx-auto px-6 pb-24">
+        <p
+          className="uppercase tracking-widest text-sm mb-6"
+          style={{ color: "#a3aac4", letterSpacing: "0.18em" }}
+        >
+          Mission Board
+        </p>
+
+        <div className="flex flex-col gap-3">
+          {missions.map((mission) => (
             <Link
-              key={lesson.number}
-              href={lesson.status === "available" ? `/lessons/${lesson.number}` : "#"}
-              className={`flex items-start gap-5 p-6 rounded-2xl border transition-shadow ${
-                lesson.status === "available"
-                  ? "bg-white border-orange-200 hover:shadow-md cursor-pointer"
-                  : "bg-zinc-50 border-zinc-200 opacity-60 cursor-not-allowed pointer-events-none"
-              }`}
+              key={mission.number}
+              href={`/lessons/${mission.number}`}
+              className="group flex items-center gap-5 p-5 rounded-xl transition-all"
+              style={{
+                background: "#0f1930",
+                borderLeft: "2px solid rgba(204,151,255,0.35)",
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.background = "#192540";
+                el.style.borderLeftColor = "rgba(204,151,255,0.9)";
+                el.style.boxShadow = "0 0 18px rgba(204,151,255,0.15)";
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.background = "#0f1930";
+                el.style.borderLeftColor = "rgba(204,151,255,0.35)";
+                el.style.boxShadow = "none";
+              }}
             >
+              {/* Number badge */}
               <div
-                className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm ${
-                  lesson.status === "available"
-                    ? "bg-orange-500 text-white"
-                    : "bg-zinc-300 text-zinc-500"
-                }`}
+                className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold text-sm"
+                style={{
+                  fontFamily: "var(--font-space-grotesk), Space Grotesk, sans-serif",
+                  background: "rgba(156, 72, 234, 0.25)",
+                  color: "#cc97ff",
+                  border: "1px solid rgba(204,151,255,0.3)",
+                }}
               >
-                {lesson.number}
+                {String(mission.number).padStart(2, "0")}
               </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-1">
-                  <h3 className="font-semibold text-zinc-800">{lesson.title}</h3>
-                  {lesson.status === "coming-soon" && (
-                    <span className="text-xs bg-zinc-200 text-zinc-500 px-2 py-0.5 rounded-full">
-                      Coming soon
-                    </span>
-                  )}
-                </div>
-                <p className="text-zinc-500 text-sm">{lesson.description}</p>
+
+              {/* Text */}
+              <div className="flex-1 min-w-0">
+                <h3
+                  className="font-bold mb-0.5"
+                  style={{
+                    fontFamily: "var(--font-space-grotesk), Space Grotesk, sans-serif",
+                    color: "#dee5ff",
+                  }}
+                >
+                  {mission.title}
+                </h3>
+                <p className="text-sm truncate" style={{ color: "#a3aac4" }}>
+                  {mission.description}
+                </p>
               </div>
-              {lesson.status === "available" && (
-                <span className="text-orange-400 text-xl self-center">→</span>
-              )}
+
+              {/* XP badge */}
+              <div
+                className="flex-shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full"
+                style={{ background: "rgba(107,255,143,0.12)", color: "#6bff8f" }}
+              >
+                +{mission.xp} XP
+              </div>
             </Link>
           ))}
         </div>
       </section>
+
+      {/* ── Footer ──────────────────────────────────────────────── */}
+      <footer
+        className="text-center py-10 px-6"
+        style={{ borderTop: "1px solid rgba(204,151,255,0.1)" }}
+      >
+        <p className="text-sm mb-1" style={{ color: "#a3aac4" }}>
+          Claude Quest — Built with Claude Code
+        </p>
+        <p className="text-xs" style={{ color: "#a3aac4", opacity: 0.6 }}>
+          Every lesson on this platform was built using the exact tools you are learning.
+        </p>
+      </footer>
+
     </div>
   );
 }
