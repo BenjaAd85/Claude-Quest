@@ -89,6 +89,142 @@ h1, h2, h3 {
   box-shadow: 0 0 18px rgba(204, 151, 255, 0.15);
 }
 
+/* ─── Lesson nav buttons ─────────────────────────────────────── */
+
+.lesson-nav-btn {
+  background: #192540;
+  color: #cc97ff;
+  border: 1px solid rgba(204, 151, 255, 0.3);
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.lesson-nav-btn:hover {
+  background: #cc97ff;
+  color: #060e20;
+}
+
+/* ─── Lesson page dark theme overrides ───────────────────────── */
+/* Scoped to .lesson-page so homepage is unaffected               */
+
+/* Text */
+.lesson-page .text-zinc-900,
+.lesson-page .text-zinc-800,
+.lesson-page .text-zinc-700  { color: #dee5ff !important; }
+.lesson-page .text-zinc-600,
+.lesson-page .text-zinc-500,
+.lesson-page .text-zinc-400,
+.lesson-page .text-zinc-200  { color: #a3aac4 !important; }
+.lesson-page .text-zinc-300  { color: #6bff8f !important; }
+
+/* Orange text → purple */
+.lesson-page .text-orange-900,
+.lesson-page .text-orange-800 { color: #dee5ff  !important; }
+.lesson-page .text-orange-700  { color: #cc97ff  !important; }
+.lesson-page .text-orange-500,
+.lesson-page .text-orange-400  { color: #cc97ff  !important; }
+.lesson-page .text-orange-100  { color: rgba(255,255,255,0.85) !important; }
+
+/* Info / warning / success text */
+.lesson-page .text-blue-800   { color: #dee5ff !important; }
+.lesson-page .text-yellow-800 { color: #dee5ff !important; }
+.lesson-page .text-green-800  { color: #dee5ff !important; }
+
+/* Prompt comparison */
+.lesson-page .text-red-700,
+.lesson-page .text-red-500    { color: #ff9999  !important; }
+.lesson-page .text-green-700,
+.lesson-page .text-green-600  { color: #6bff8f  !important; }
+.lesson-page .text-red-800,
+.lesson-page .text-green-900  { color: #dee5ff  !important; }
+
+/* Backgrounds */
+.lesson-page .bg-white        { background-color: #091328 !important; }
+.lesson-page .bg-zinc-50      { background-color: #0f1930 !important; }
+
+/* Step connector lines only (w-px) */
+.lesson-page .w-px            { background-color: rgba(204,151,255,0.15) !important; }
+/* Other zinc-100 elements (kbd badges etc) */
+.lesson-page .bg-zinc-100:not(.w-px) { background-color: #192540 !important; }
+
+/* Step circles: orange → purple */
+.lesson-page .bg-orange-500.rounded-full  { background-color: #9c48ea !important; }
+
+/* Next lesson button inside content: orange → purple gradient */
+.lesson-page .bg-orange-500.rounded-xl {
+  background: linear-gradient(135deg, #cc97ff, #9c48ea) !important;
+}
+.lesson-page .hover\:bg-orange-600:hover  { background-color: #9c48ea !important; }
+
+/* Celebration banner: orange → purple gradient */
+.lesson-page .bg-orange-500.rounded-2xl {
+  background: linear-gradient(135deg, #9c48ea, #4a1a8a) !important;
+}
+
+/* Key takeaway box */
+.lesson-page .bg-orange-50    { background: linear-gradient(135deg, #1a0a2e, #0f1930) !important; }
+.lesson-page .border-orange-200 { border-color: #cc97ff !important; }
+.lesson-page .border-2.border-orange-200 { border-color: #cc97ff !important; }
+
+/* Part header separators */
+.lesson-page .border-b-2.border-orange-100 { border-color: rgba(204,151,255,0.2) !important; }
+
+/* Info boxes */
+.lesson-page .bg-blue-50      { background-color: #0f1930 !important; }
+.lesson-page .border-blue-200 { border-color: #69daff   !important; }
+
+/* Warning boxes */
+.lesson-page .bg-yellow-50      { background-color: #1a1200 !important; }
+.lesson-page .border-yellow-200 { border-color: #f0c040  !important; }
+
+/* Success boxes */
+.lesson-page .bg-green-50      { background-color: #001a0a !important; }
+.lesson-page .border-green-200 { border-color: #6bff8f   !important; }
+
+/* Weak prompt comparison */
+.lesson-page .bg-red-50      { background-color: #1a0505 !important; }
+.lesson-page .border-red-200 { border-color: #ff6b6b   !important; }
+
+/* Code block outer shell: black + purple left border */
+.lesson-page .bg-zinc-900 {
+  background-color: #000 !important;
+  border-left: 2px solid #cc97ff;
+}
+/* Code block title bar (inside font-mono containers) */
+.lesson-page .font-mono .bg-zinc-800,
+.lesson-page .bg-zinc-900 .bg-zinc-800 { background-color: #0a0a14 !important; }
+.lesson-page .bg-zinc-900 .border-zinc-700 { border-color: #1a1a2e !important; }
+.lesson-page .bg-zinc-900 .text-zinc-500   { color: #4b5563 !important; }
+
+/* Copy button inside code blocks */
+.lesson-page .bg-zinc-900 button {
+  background: #192540 !important;
+  color: #cc97ff !important;
+  border-color: rgba(204, 151, 255, 0.3) !important;
+}
+.lesson-page .bg-zinc-900 button:hover {
+  background: #cc97ff !important;
+  color: #060e20 !important;
+}
+
+/* Link buttons (nodejs, github, vercel etc) */
+.lesson-page a.bg-zinc-800 {
+  background-color: #192540 !important;
+  color: #cc97ff !important;
+}
+.lesson-page a.bg-zinc-800:hover { background-color: #cc97ff !important; color: #060e20 !important; }
+.lesson-page .text-zinc-100 { color: #dee5ff !important; }
+
+/* Keyboard shortcut badges */
+.lesson-page .border-zinc-300 { border-color: rgba(204,151,255,0.4) !important; }
+
+/* Misc border overrides */
+.lesson-page .border-zinc-200 { border-color: rgba(204,151,255,0.2) !important; }
+.lesson-page .border-zinc-100 { border-color: rgba(204,151,255,0.15) !important; }
+
 /* ─── Mobile: scrollable code blocks ────────────────────────── */
 
 @media (max-width: 640px) {

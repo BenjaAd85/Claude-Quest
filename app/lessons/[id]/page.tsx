@@ -3718,35 +3718,57 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
   const nextId = lessons[String(lessonNumber + 1)] ? String(lessonNumber + 1) : null;
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="border-b border-orange-100 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+    <div className="lesson-page min-h-screen" style={{ background: "#060e20", color: "#dee5ff" }}>
+
+      {/* ── Nav ─────────────────────────────────────────────────── */}
+      <header
+        className="sticky top-0 z-20 backdrop-blur-md"
+        style={{ background: "rgba(6,14,32,0.9)", borderBottom: "1px solid rgba(204,151,255,0.2)" }}
+      >
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <span className="text-2xl">⚔️</span>
-            <span className="font-bold text-xl text-orange-600">Claude Quest</span>
+            <span style={{ color: "#cc97ff", fontWeight: 700, fontSize: "1rem" }}>›</span>
+            <span style={{ fontFamily: "var(--font-space-grotesk), Space Grotesk, sans-serif", fontWeight: 700, fontSize: "1rem", color: "#cc97ff", letterSpacing: "0.05em" }}>
+              CLAUDE_QUEST
+            </span>
           </Link>
-          <span className="text-sm text-zinc-400">Lesson {id}</span>
+          <div
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-semibold"
+            style={{ background: "#192540", color: "#6bff8f" }}
+          >
+            <span>⚡</span>
+            <span>+100 XP</span>
+          </div>
         </div>
       </header>
 
-      {/* Content */}
-      <main className="max-w-2xl mx-auto px-6 py-16">
-        <Link href="/" className="text-sm text-orange-500 hover:text-orange-600 mb-8 inline-block">
-          ← Back to lessons
-        </Link>
+      {/* ── Lesson Header ────────────────────────────────────────── */}
+      <div className="max-w-2xl mx-auto px-6 pt-12 pb-8">
+        <p
+          className="uppercase text-sm mb-3"
+          style={{ color: "#a3aac4", letterSpacing: "0.2em" }}
+        >
+          Mission {id.padStart(2, "0")}
+        </p>
+        <h1
+          className="font-bold mb-3"
+          style={{
+            fontFamily: "var(--font-space-grotesk), Space Grotesk, sans-serif",
+            fontSize: "2.25rem",
+            color: "#dee5ff",
+            lineHeight: 1.2,
+          }}
+        >
+          {lesson.title}
+        </h1>
+        <p className="mb-8" style={{ color: "#a3aac4", fontSize: "1.1rem", lineHeight: 1.6 }}>
+          {lesson.description}
+        </p>
+        <div style={{ height: "1px", background: "linear-gradient(to right, rgba(204,151,255,0.5), transparent)" }} />
+      </div>
 
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm">
-            {id}
-          </div>
-          <span className="text-sm text-zinc-400 font-medium uppercase tracking-wide">Lesson {id}</span>
-        </div>
-
-        <h1 className="text-4xl font-bold text-zinc-900 mb-4">{lesson.title}</h1>
-        <p className="text-lg text-zinc-500 mb-10">{lesson.description}</p>
-
-        {/* Lesson-specific content */}
+      {/* ── Content ─────────────────────────────────────────────── */}
+      <main className="max-w-2xl mx-auto px-6 pb-20">
         {id === "1" ? (
           <Lesson1Content />
         ) : id === "2" ? (
@@ -3764,27 +3786,30 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
         ) : id === "8" ? (
           <Lesson8Content />
         ) : (
-          <div className="prose prose-zinc max-w-none">
+          <div>
             {lesson.content.split("\n\n").map((paragraph, i) => (
-              <p key={i} className="text-zinc-700 leading-relaxed mb-6">
+              <p key={i} className="leading-relaxed mb-6" style={{ color: "#a3aac4" }}>
                 {paragraph}
               </p>
             ))}
           </div>
         )}
 
-        {/* Navigation */}
-        <div className="flex justify-between mt-16 pt-8 border-t border-zinc-100">
+        {/* ── Bottom Nav ───────────────────────────────────────── */}
+        <div
+          className="flex justify-between mt-16 pt-8"
+          style={{ borderTop: "1px solid rgba(204,151,255,0.2)" }}
+        >
           {prevId ? (
-            <Link href={`/lessons/${prevId}`} className="text-sm text-orange-500 hover:text-orange-600 font-medium">
-              ← Lesson {prevId}
+            <Link href={`/lessons/${prevId}`} className="lesson-nav-btn">
+              ← Mission {prevId}
             </Link>
           ) : (
             <span />
           )}
           {nextId ? (
-            <Link href={`/lessons/${nextId}`} className="text-sm text-orange-500 hover:text-orange-600 font-medium">
-              Lesson {nextId} →
+            <Link href={`/lessons/${nextId}`} className="lesson-nav-btn">
+              Mission {nextId} →
             </Link>
           ) : (
             <span />
