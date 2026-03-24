@@ -111,18 +111,7 @@ export default function Home() {
         </p>
         <Link
           href="/lessons/1"
-          className="inline-flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full text-lg transition-all hover:scale-105"
-          style={{
-            background: "linear-gradient(135deg, #cc97ff, #9c48ea)",
-            boxShadow: "0 0 0 rgba(204,151,255,0)",
-            transition: "box-shadow 0.2s, transform 0.2s",
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 0 24px rgba(204,151,255,0.45)";
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 0 0 rgba(204,151,255,0)";
-          }}
+          className="cta-button inline-flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full text-lg"
         >
           Start Mission 1 →
         </Link>
@@ -142,23 +131,7 @@ export default function Home() {
             <Link
               key={mission.number}
               href={`/lessons/${mission.number}`}
-              className="group flex items-center gap-5 p-5 rounded-xl transition-all"
-              style={{
-                background: "#0f1930",
-                borderLeft: "2px solid rgba(204,151,255,0.35)",
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.background = "#192540";
-                el.style.borderLeftColor = "rgba(204,151,255,0.9)";
-                el.style.boxShadow = "0 0 18px rgba(204,151,255,0.15)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.background = "#0f1930";
-                el.style.borderLeftColor = "rgba(204,151,255,0.35)";
-                el.style.boxShadow = "none";
-              }}
+              className="mission-card flex items-center gap-5 p-5 rounded-xl"
             >
               {/* Number badge */}
               <div

@@ -67,6 +67,28 @@ h1, h2, h3 {
   color: var(--primary);
 }
 
+/* ─── Homepage interactive elements ─────────────────────────── */
+
+.cta-button {
+  background: linear-gradient(135deg, #cc97ff, #9c48ea);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.cta-button:hover {
+  box-shadow: 0 0 24px rgba(204, 151, 255, 0.45);
+  transform: scale(1.05);
+}
+
+.mission-card {
+  background: #0f1930;
+  border-left: 2px solid rgba(204, 151, 255, 0.35);
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+.mission-card:hover {
+  background: #192540;
+  border-left-color: rgba(204, 151, 255, 0.9);
+  box-shadow: 0 0 18px rgba(204, 151, 255, 0.15);
+}
+
 /* ─── Mobile: scrollable code blocks ────────────────────────── */
 
 @media (max-width: 640px) {
