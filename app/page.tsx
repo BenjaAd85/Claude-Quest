@@ -48,7 +48,7 @@ export default function Home() {
       number: 8,
       title: "How to Plan Bigger Projects",
       description: "How to structure a real project so Claude Code builds exactly what you want.",
-      status: "coming-soon",
+      status: "available",
     },
   ];
 
