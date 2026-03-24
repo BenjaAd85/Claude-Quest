@@ -174,8 +174,12 @@ export default function Home() {
                     <Link
                       href={`/lessons/${mission.number}`}
                       className="mission-card-tree relative z-10 w-full max-w-xs rounded-2xl p-6 text-center"
+                      style={{
+                        background: "#0f1930",
+                        border: "1px solid rgba(204, 151, 255, 0.15)",
+                      }}
                     >
-                      <div className="text-4xl mb-3">{icon}</div>
+                      <div className="mb-3" style={{ fontSize: "3rem", lineHeight: 1 }}>{icon}</div>
                       <p
                         className="uppercase tracking-widest text-xs mb-1.5"
                         style={{ color: "#a3aac4", letterSpacing: "0.15em" }}
@@ -196,7 +200,7 @@ export default function Home() {
                         style={{
                           color: "#a3aac4",
                           display: "-webkit-box",
-                          WebkitLineClamp: 2,
+                          WebkitLineClamp: 3,
                           WebkitBoxOrient: "vertical",
                           overflow: "hidden",
                         }}
@@ -204,19 +208,22 @@ export default function Home() {
                         {mission.description}
                       </p>
                       <div
-                        className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full"
+                        className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full mb-3"
                         style={{ background: "rgba(107,255,143,0.12)", color: "#6bff8f" }}
                       >
                         +{mission.xp} XP
                       </div>
+                      <p className="text-xs font-medium" style={{ color: "#cc97ff" }}>
+                        ENTER MISSION →
+                      </p>
                     </Link>
                   </div>
 
                   {/* Diamond connector node between cards */}
                   {i < missions.length - 1 && (
                     <div
-                      className="relative z-10 my-5 w-3 h-3 rotate-45 rounded-sm"
-                      style={{ background: "rgba(204,151,255,0.55)" }}
+                      className="relative z-10 my-5 rotate-45 rounded-sm"
+                      style={{ width: "12px", height: "12px", background: "rgba(204,151,255,0.55)" }}
                     />
                   )}
 
