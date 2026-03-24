@@ -1,4 +1,5 @@
 import Link from "next/link";
+import NavBar from "@/components/NavBar";
 
 const missionIcons: Record<number, string> = {
   1: "🤖",
@@ -67,37 +68,7 @@ export default function Home() {
     <div className="min-h-screen" style={{ background: "#060e20", color: "#dee5ff" }}>
 
       {/* ── Nav ─────────────────────────────────────────────────── */}
-      <header
-        className="sticky top-0 z-20 backdrop-blur-md"
-        style={{
-          background: "rgba(6, 14, 32, 0.85)",
-          borderBottom: "1px solid rgba(204, 151, 255, 0.2)",
-        }}
-      >
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span style={{ color: "#cc97ff", fontWeight: 700, fontSize: "0.95rem" }}>›</span>
-            <span
-              style={{
-                fontFamily: "var(--font-space-grotesk), Space Grotesk, sans-serif",
-                fontWeight: 700,
-                fontSize: "1.1rem",
-                color: "#cc97ff",
-                letterSpacing: "0.05em",
-              }}
-            >
-              CLAUDE_QUEST
-            </span>
-          </div>
-          <div
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-semibold"
-            style={{ background: "#192540", color: "#6bff8f" }}
-          >
-            <span>⚡</span>
-            <span>0 XP</span>
-          </div>
-        </div>
-      </header>
+      <NavBar />
 
       {/* ── Hero ────────────────────────────────────────────────── */}
       <section className="max-w-4xl mx-auto px-6 py-24 text-center">
