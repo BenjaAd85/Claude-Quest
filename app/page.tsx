@@ -1,5 +1,16 @@
 import Link from "next/link";
 
+const missionIcons: Record<number, string> = {
+  1: "🤖",
+  2: "🏗️",
+  3: "🔥",
+  4: "📂",
+  5: "⚡",
+  6: "🐛",
+  7: "✍️",
+  8: "🗺️",
+};
+
 const missions = [
   {
     number: 1,
@@ -117,60 +128,102 @@ export default function Home() {
         </Link>
       </section>
 
-      {/* ── Mission Board ────────────────────────────────────────── */}
-      <section className="max-w-4xl mx-auto px-6 pb-24">
-        <p
-          className="uppercase tracking-widest text-sm mb-6"
-          style={{ color: "#a3aac4", letterSpacing: "0.18em" }}
-        >
-          Mission Board
-        </p>
+      {/* ── Skill Tree ───────────────────────────────────────────── */}
+      <section className="max-w-4xl mx-auto px-6 pb-32">
 
-        <div className="flex flex-col gap-3">
-          {missions.map((mission) => (
-            <Link
-              key={mission.number}
-              href={`/lessons/${mission.number}`}
-              className="mission-card flex items-center gap-5 p-5 rounded-xl"
-            >
-              {/* Number badge */}
-              <div
-                className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-bold text-sm"
-                style={{
-                  fontFamily: "var(--font-space-grotesk), Space Grotesk, sans-serif",
-                  background: "rgba(156, 72, 234, 0.25)",
-                  color: "#cc97ff",
-                  border: "1px solid rgba(204,151,255,0.3)",
-                }}
-              >
-                {String(mission.number).padStart(2, "0")}
-              </div>
+        {/* Section header */}
+        <div className="text-center mb-16">
+          <p
+            className="uppercase tracking-widest text-sm mb-3"
+            style={{ color: "#a3aac4", letterSpacing: "0.18em" }}
+          >
+            Mission Board
+          </p>
+          <p className="text-base" style={{ color: "#a3aac4" }}>
+            Complete all 8 missions to become a Claude Code power user.
+          </p>
+        </div>
 
-              {/* Text */}
-              <div className="flex-1 min-w-0">
-                <h3
-                  className="font-bold mb-0.5"
-                  style={{
-                    fontFamily: "var(--font-space-grotesk), Space Grotesk, sans-serif",
-                    color: "#dee5ff",
-                  }}
-                >
-                  {mission.title}
-                </h3>
-                <p className="text-sm truncate" style={{ color: "#a3aac4" }}>
-                  {mission.description}
-                </p>
-              </div>
+        {/* Tree */}
+        <div className="relative">
 
-              {/* XP badge */}
-              <div
-                className="flex-shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full"
-                style={{ background: "rgba(107,255,143,0.12)", color: "#6bff8f" }}
-              >
-                +{mission.xp} XP
-              </div>
-            </Link>
-          ))}
+          {/* Vertical dashed path line */}
+          <div
+            className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px pointer-events-none"
+            style={{
+              background:
+                "repeating-linear-gradient(to bottom, rgba(204,151,255,0.25) 0px, rgba(204,151,255,0.25) 8px, transparent 8px, transparent 18px)",
+            }}
+          />
+
+          <div className="flex flex-col">
+            {missions.map((mission, i) => {
+              const isLeft = i % 2 === 0;
+              const icon = missionIcons[mission.number];
+              const numStr = String(mission.number).padStart(2, "0");
+
+              return (
+                <div key={mission.number} className="flex flex-col items-center">
+
+                  {/* Card row — alternates left / right on md+ */}
+                  <div
+                    className={`w-full flex justify-center ${
+                      isLeft ? "md:justify-start" : "md:justify-end"
+                    }`}
+                  >
+                    <Link
+                      href={`/lessons/${mission.number}`}
+                      className="mission-card-tree relative z-10 w-full max-w-xs rounded-2xl p-6 text-center"
+                    >
+                      <div className="text-4xl mb-3">{icon}</div>
+                      <p
+                        className="uppercase tracking-widest text-xs mb-1.5"
+                        style={{ color: "#a3aac4", letterSpacing: "0.15em" }}
+                      >
+                        Mission {numStr}
+                      </p>
+                      <h3
+                        className="font-bold text-base mb-2 leading-snug"
+                        style={{
+                          fontFamily: "var(--font-space-grotesk), Space Grotesk, sans-serif",
+                          color: "#dee5ff",
+                        }}
+                      >
+                        {mission.title}
+                      </h3>
+                      <p
+                        className="text-sm mb-4"
+                        style={{
+                          color: "#a3aac4",
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: "vertical",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {mission.description}
+                      </p>
+                      <div
+                        className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full"
+                        style={{ background: "rgba(107,255,143,0.12)", color: "#6bff8f" }}
+                      >
+                        +{mission.xp} XP
+                      </div>
+                    </Link>
+                  </div>
+
+                  {/* Diamond connector node between cards */}
+                  {i < missions.length - 1 && (
+                    <div
+                      className="relative z-10 my-5 w-3 h-3 rotate-45 rounded-sm"
+                      style={{ background: "rgba(204,151,255,0.55)" }}
+                    />
+                  )}
+
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 

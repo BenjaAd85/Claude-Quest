@@ -78,6 +78,18 @@ h1, h2, h3 {
   transform: scale(1.05);
 }
 
+/* Skill-tree cards */
+.mission-card-tree {
+  background: #0f1930;
+  border: 1px solid rgba(204, 151, 255, 0.15);
+  transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.mission-card-tree:hover {
+  background: #192540;
+  box-shadow: 0 0 20px rgba(204, 151, 255, 0.2);
+  border-color: rgba(204, 151, 255, 0.4);
+}
+
 .mission-card {
   background: #0f1930;
   border-left: 2px solid rgba(204, 151, 255, 0.35);
