@@ -42,7 +42,7 @@ export default function Home() {
       number: 7,
       title: "How to Write Better Prompts",
       description: "Small changes to how you describe things lead to dramatically better results.",
-      status: "coming-soon",
+      status: "available",
     },
     {
       number: 8,
