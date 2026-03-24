@@ -120,12 +120,21 @@ h1, h2, h3 {
 .lesson-page .text-zinc-200  { color: #a3aac4 !important; }
 .lesson-page .text-zinc-300  { color: #6bff8f !important; }
 
-/* Orange text → purple */
+/* Base element rules — fallback so unclassed text is always readable */
+.lesson-page main p   { color: #dee5ff; }
+.lesson-page main h2  { color: #dee5ff; }
+.lesson-page main h3  { color: #cc97ff; }
+.lesson-page main li  { color: #dee5ff; }
+
+/* Orange text → purple/white */
 .lesson-page .text-orange-900,
-.lesson-page .text-orange-800 { color: #dee5ff  !important; }
+.lesson-page .text-orange-800  { color: #dee5ff  !important; }
 .lesson-page .text-orange-700  { color: #cc97ff  !important; }
+.lesson-page .text-orange-600  { color: #cc97ff  !important; }
 .lesson-page .text-orange-500,
 .lesson-page .text-orange-400  { color: #cc97ff  !important; }
+.lesson-page .text-orange-300  { color: #cc97ff  !important; }
+.lesson-page .text-orange-200  { color: #a3aac4  !important; }
 .lesson-page .text-orange-100  { color: rgba(255,255,255,0.85) !important; }
 
 /* Info / warning / success text */
@@ -133,13 +142,15 @@ h1, h2, h3 {
 .lesson-page .text-yellow-800 { color: #dee5ff !important; }
 .lesson-page .text-green-800  { color: #dee5ff !important; }
 
-/* Prompt comparison */
+/* Prompt comparison + green labels */
 .lesson-page .text-red-700,
-.lesson-page .text-red-500    { color: #ff9999  !important; }
+.lesson-page .text-red-500,
+.lesson-page .text-red-800    { color: #ff9999  !important; }
+.lesson-page .text-green-900,
+.lesson-page .text-green-800,
 .lesson-page .text-green-700,
-.lesson-page .text-green-600  { color: #6bff8f  !important; }
-.lesson-page .text-red-800,
-.lesson-page .text-green-900  { color: #dee5ff  !important; }
+.lesson-page .text-green-600,
+.lesson-page .text-green-500  { color: #6bff8f  !important; }
 
 /* Backgrounds */
 .lesson-page .bg-white        { background-color: #091328 !important; }
@@ -187,6 +198,10 @@ h1, h2, h3 {
 /* Weak prompt comparison */
 .lesson-page .bg-red-50      { background-color: #1a0505 !important; }
 .lesson-page .border-red-200 { border-color: #ff6b6b   !important; }
+
+/* Green / orange badge backgrounds */
+.lesson-page .bg-green-100   { background-color: rgba(107, 255, 143, 0.12) !important; }
+.lesson-page .bg-orange-100  { background-color: rgba(204, 151, 255, 0.1)  !important; }
 
 /* Code block outer shell: black + purple left border */
 .lesson-page .bg-zinc-900 {
