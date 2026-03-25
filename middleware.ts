@@ -3,9 +3,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
+    request,
   })
 
   const supabase = createServerClient(
@@ -17,14 +15,13 @@ export async function middleware(request: NextRequest) {
           return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
+          // Write cookies onto the request so subsequent server code sees them
+          cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           )
-          supabaseResponse = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
-          })
+          // Recreate the response with the full (mutated) request object
+          supabaseResponse = NextResponse.next({ request })
+          // Write cookies onto the response so the browser stores them
           cookiesToSet.forEach(({ name, value, options }) =>
             supabaseResponse.cookies.set(name, value, options)
           )
@@ -33,6 +30,8 @@ export async function middleware(request: NextRequest) {
     }
   )
 
+  // Refreshes the session and rotates the token if it is close to expiry.
+  // Must use getUser() (not getSession()) so the token is validated server-side.
   await supabase.auth.getUser()
 
   return supabaseResponse
