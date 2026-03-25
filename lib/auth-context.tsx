@@ -62,10 +62,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // ── Session management ───────────────────────────────────────
   useEffect(() => {
     mountedRef.current = true;
+    let loadingResolved = false;
 
-    // onAuthStateChange fires INITIAL_SESSION on mount with the stored
-    // session — this is the recommended single-source approach for Next.js
-    // and avoids the race between getSession() + onAuthStateChange.
+    const resolveLoading = () => {
+      if (!loadingResolved && mountedRef.current) {
+        loadingResolved = true;
+        setLoading(false);
+      }
+    };
+
+    // getSession() reads from cookies (fast, no network round-trip) so we
+    // use it to populate auth state immediately on mount.
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (!mountedRef.current) return;
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
+      if (currentUser) {
+        await fetchUserXP(currentUser.id);
+      }
+      resolveLoading();
+    });
+
+    // onAuthStateChange handles sign-in / sign-out / token refresh after mount.
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
@@ -81,8 +99,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setCompletedLessons([]);
       }
 
-      // Always resolve loading after first auth event
-      if (mountedRef.current) setLoading(false);
+      resolveLoading();
     });
 
     return () => {
