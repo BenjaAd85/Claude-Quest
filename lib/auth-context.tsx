@@ -62,62 +62,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // ── Session management ───────────────────────────────────────
   useEffect(() => {
     mountedRef.current = true;
-    let loadingResolved = false;
 
-    const resolveLoading = () => {
-      if (!loadingResolved && mountedRef.current) {
-        loadingResolved = true;
-        setLoading(false);
-      }
-    };
-
-    // getSession() reads from cookies (fast, no network round-trip) so we
-    // use it to populate auth state immediately on mount.
-    // On Vercel, cookies can take a moment to be readable after a fresh load,
-    // so if the first attempt finds no session we retry once after 500ms.
-    const tryGetSession = async () => {
+    // Get initial session immediately so state is set before onAuthStateChange
+    // fires — guards against INITIAL_SESSION arriving before the listener attaches.
+    supabase.auth.getSession().then(({ data: { session } }) => {
       if (!mountedRef.current) return;
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!mountedRef.current) return;
+      setUser(session?.user ?? null);
+      if (session?.user) fetchUserXP(session.user.id);
+      setLoading(false);
+    });
 
-      if (!session) {
-        // Retry once after 500ms in case the cookie wasn't readable yet
-        await new Promise(res => setTimeout(res, 500));
-        if (!mountedRef.current) return;
-        const { data: { session: retrySession } } = await supabase.auth.getSession();
-        if (!mountedRef.current) return;
-        const currentUser = retrySession?.user ?? null;
-        setUser(currentUser);
-        if (currentUser) await fetchUserXP(currentUser.id);
-        resolveLoading();
-        return;
-      }
-
-      const currentUser = session.user;
-      setUser(currentUser);
-      await fetchUserXP(currentUser.id);
-      resolveLoading();
-    };
-
-    tryGetSession();
-
-    // onAuthStateChange handles sign-in / sign-out / token refresh after mount.
+    // Listen for all subsequent auth changes (sign-in, sign-out, token refresh)
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
       if (!mountedRef.current) return;
-
       const currentUser = session?.user ?? null;
       setUser(currentUser);
-
       if (currentUser) {
         await fetchUserXP(currentUser.id);
       } else {
         setTotalXP(0);
         setCompletedLessons([]);
       }
-
-      resolveLoading();
+      setLoading(false);
     });
 
     return () => {
