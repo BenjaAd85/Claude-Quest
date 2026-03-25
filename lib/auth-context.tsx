@@ -9,7 +9,7 @@ import {
   ReactNode,
 } from "react";
 import { User } from "@supabase/supabase-js";
-import { createClient } from "./supabase-browser";
+import { supabase } from "./supabase-browser";
 
 interface AuthContextType {
   user: User | null;
@@ -35,25 +35,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
   const [loading, setLoading]                   = useState(true);
   const mountedRef                              = useRef(true);
-  // Refs so async callbacks always see current values (no stale closures)
-  const totalXPRef          = useRef(0);
-  const completedLessonsRef = useRef<number[]>([]);
-  const userRef             = useRef<User | null>(null);
+  // Refs so async callbacks always read current values without stale closures
+  const totalXPRef           = useRef(0);
+  const completedLessonsRef  = useRef<number[]>([]);
+  const userRef              = useRef<User | null>(null);
 
+  // Keep refs in sync with state
   useEffect(() => { totalXPRef.current = totalXP; }, [totalXP]);
   useEffect(() => { completedLessonsRef.current = completedLessons; }, [completedLessons]);
   useEffect(() => { userRef.current = user; }, [user]);
 
   // ── Fetch XP row for a user ──────────────────────────────────
   const fetchUserXP = async (userId: string) => {
-    const supabase = createClient();
     const { data } = await supabase
       .from("user_xp")
       .select("total_xp, completed_lessons")
       .eq("user_id", userId)
-      .maybeSingle();
+      .maybeSingle();                         // won't throw when row is absent
 
     if (!mountedRef.current) return;
+
     setTotalXP(data?.total_xp ?? 0);
     setCompletedLessons(data?.completed_lessons ?? []);
   };
@@ -61,33 +62,62 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // ── Session management ───────────────────────────────────────
   useEffect(() => {
     mountedRef.current = true;
-    const supabase = createClient();
+    let loadingResolved = false;
 
-    // onAuthStateChange fires INITIAL_SESSION on mount, which reads the
-    // session from the cookie set by the middleware. This is the single
-    // source of truth — no separate getSession() call needed.
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
+    const resolveLoading = () => {
+      if (!loadingResolved && mountedRef.current) {
+        loadingResolved = true;
+        setLoading(false);
+      }
+    };
+
+    // getSession() reads from cookies (fast, no network round-trip) so we
+    // use it to populate auth state immediately on mount.
+    // On Vercel, cookies can take a moment to be readable after a fresh load,
+    // so if the first attempt finds no session we retry once after 500ms.
+    const tryGetSession = async () => {
+      if (!mountedRef.current) return;
+      const { data: { session } } = await supabase.auth.getSession();
       if (!mountedRef.current) return;
 
-      if (event === "SIGNED_OUT") {
-        setUser(null);
-        setTotalXP(0);
-        setCompletedLessons([]);
-        setLoading(false);
+      if (!session) {
+        // Retry once after 500ms in case the cookie wasn't readable yet
+        await new Promise(res => setTimeout(res, 500));
+        if (!mountedRef.current) return;
+        const { data: { session: retrySession } } = await supabase.auth.getSession();
+        if (!mountedRef.current) return;
+        const currentUser = retrySession?.user ?? null;
+        setUser(currentUser);
+        if (currentUser) await fetchUserXP(currentUser.id);
+        resolveLoading();
         return;
       }
 
-      // INITIAL_SESSION, SIGNED_IN, TOKEN_REFRESHED
+      const currentUser = session.user;
+      setUser(currentUser);
+      await fetchUserXP(currentUser.id);
+      resolveLoading();
+    };
+
+    tryGetSession();
+
+    // onAuthStateChange handles sign-in / sign-out / token refresh after mount.
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (!mountedRef.current) return;
+
       const currentUser = session?.user ?? null;
       setUser(currentUser);
 
       if (currentUser) {
         await fetchUserXP(currentUser.id);
+      } else {
+        setTotalXP(0);
+        setCompletedLessons([]);
       }
 
-      if (mountedRef.current) setLoading(false);
+      resolveLoading();
     });
 
     return () => {
@@ -96,12 +126,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // ── completeStep: save to DB + re-sync XP ───────────────────
+  // ── completeStep: save + immediately re-sync XP ─────────────
   const completeStep = async (lessonId: number, stepId: string) => {
     const currentUser = userRef.current;
     if (!currentUser) return;
 
-    const supabase = createClient();
     await supabase.from("user_progress").upsert(
       {
         user_id: currentUser.id,
@@ -112,24 +141,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       { onConflict: "user_id,lesson_id,step_id" }
     );
 
+    // Re-sync so the XP counter reflects any DB-side changes
     await fetchUserXP(currentUser.id);
   };
 
-  // ── completeMission: optimistic XP update + persist ─────────
+  // ── completeMission: award XP immediately in state ──────────
   const completeMission = async (lessonId: number) => {
     const currentUser = userRef.current;
     if (!currentUser) return;
 
+    // Guard against double-award using ref (avoids stale closure)
     if (completedLessonsRef.current.includes(lessonId)) return;
 
+    // Optimistically update local state first so the navbar reflects
+    // the new XP immediately without waiting for the DB round-trip
     const newXP        = totalXPRef.current + 100;
     const newCompleted = [...completedLessonsRef.current, lessonId];
 
-    // Optimistic update so the navbar reflects new XP immediately
     setTotalXP(newXP);
     setCompletedLessons(newCompleted);
 
-    const supabase = createClient();
+    // Persist to Supabase
     const { error } = await supabase.from("user_xp").upsert(
       {
         user_id: currentUser.id,
@@ -143,7 +175,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.error("[auth] completeMission upsert error:", error.message);
     }
 
-    // Re-sync to confirm DB state matches
+    // Always re-sync after write so state matches DB exactly
     if (mountedRef.current) await fetchUserXP(currentUser.id);
   };
 
