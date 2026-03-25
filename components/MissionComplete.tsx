@@ -25,7 +25,9 @@ export default function MissionComplete({ lessonId, totalSteps }: MissionComplet
       .select("step_id")
       .eq("user_id", user.id)
       .eq("lesson_id", lessonId);
-    setCompletedCount(data?.length ?? 0);
+    // Use Math.max so we never overwrite a locally-incremented count
+    // that is ahead of the DB (race: user ticks fast before DB write lands)
+    setCompletedCount(prev => Math.max(prev, data?.length ?? 0));
   }, [user, lessonId]);
 
   // Load on mount / user change

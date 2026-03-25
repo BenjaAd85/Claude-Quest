@@ -73,15 +73,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     // getSession() reads from cookies (fast, no network round-trip) so we
     // use it to populate auth state immediately on mount.
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
+    // On Vercel, cookies can take a moment to be readable after a fresh load,
+    // so if the first attempt finds no session we retry once after 500ms.
+    const tryGetSession = async () => {
       if (!mountedRef.current) return;
-      const currentUser = session?.user ?? null;
-      setUser(currentUser);
-      if (currentUser) {
-        await fetchUserXP(currentUser.id);
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!mountedRef.current) return;
+
+      if (!session) {
+        // Retry once after 500ms in case the cookie wasn't readable yet
+        await new Promise(res => setTimeout(res, 500));
+        if (!mountedRef.current) return;
+        const { data: { session: retrySession } } = await supabase.auth.getSession();
+        if (!mountedRef.current) return;
+        const currentUser = retrySession?.user ?? null;
+        setUser(currentUser);
+        if (currentUser) await fetchUserXP(currentUser.id);
+        resolveLoading();
+        return;
       }
+
+      const currentUser = session.user;
+      setUser(currentUser);
+      await fetchUserXP(currentUser.id);
       resolveLoading();
-    });
+    };
+
+    tryGetSession();
 
     // onAuthStateChange handles sign-in / sign-out / token refresh after mount.
     const {
