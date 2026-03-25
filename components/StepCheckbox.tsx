@@ -24,23 +24,25 @@ export default function StepCheckbox({
   const [saving, setSaving] = useState(false);
   const [showSignInHint, setShowSignInHint] = useState(false);
 
-  // Load saved progress when user is known
+  // Restore checked state from Supabase whenever the signed-in user is known
   useEffect(() => {
-    if (!user) {
+    if (!user?.id) {
       setChecked(false);
       return;
     }
+    let cancelled = false;
     supabase
       .from("user_progress")
-      .select("id")
+      .select("step_id")
       .eq("user_id", user.id)
       .eq("lesson_id", lessonId)
       .eq("step_id", stepId)
       .maybeSingle()
       .then(({ data }) => {
-        if (data) setChecked(true);
+        if (!cancelled && data) setChecked(true);
       });
-  }, [user, lessonId, stepId]);
+    return () => { cancelled = true; };
+  }, [user?.id, lessonId, stepId]); // use user.id so ref changes don't retrigger
 
   const handleCheck = async () => {
     if (checked || saving) return;
