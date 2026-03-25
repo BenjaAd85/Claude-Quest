@@ -1,7 +1,9 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import NavBar from "@/components/NavBar";
-import { notFound } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import Lesson1SetupSection from "./Lesson1SetupSection";
 import Lesson2Section from "./Lesson2Section";
 import Lesson3Section from "./Lesson3Section";
@@ -314,8 +316,9 @@ function Lesson1Content() {
 }
 /* ─── Page ───────────────────────────────────────────────────── */
 
-export default async function LessonPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export default function LessonPage() {
+  const params = useParams();
+  const id = params.id as string;
   const lesson = lessons[id];
 
   if (!lesson) notFound();
