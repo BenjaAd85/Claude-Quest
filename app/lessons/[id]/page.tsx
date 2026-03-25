@@ -3,6 +3,8 @@ import Link from "next/link";
 import NavBar from "@/components/NavBar";
 import { notFound } from "next/navigation";
 import CopyButton from "./CopyButton";
+import StepCheckbox from "@/components/StepCheckbox";
+import MissionComplete from "@/components/MissionComplete";
 
 const lessons: Record<string, { title: string; description: string; content: string }> = {
   "1": {
@@ -153,6 +155,7 @@ function VercelIllustration() {
 function Lesson1Content() {
   return (
     <div className="space-y-12">
+      <MissionComplete lessonId={1} totalSteps={4} />
 
       {/* One sentence version */}
       <div className="bg-orange-50 border border-orange-100 rounded-2xl p-6">
@@ -177,93 +180,63 @@ function Lesson1Content() {
         <div className="space-y-4">
 
           {/* Step 1 */}
-          <div className="flex gap-4 p-5 rounded-2xl border border-zinc-100 bg-white">
-            <div className="flex flex-col items-center gap-1 shrink-0">
-              <div className="w-7 h-7 rounded-full bg-green-100 text-green-600 text-xs font-bold flex items-center justify-center">1</div>
-              <div className="w-px flex-1 bg-zinc-100" />
+          <StepCheckbox lessonId={1} stepId="step-1" stepNumber={1} title="Install Node.js">
+            <div className="flex items-start justify-between gap-4 flex-wrap">
+              <p className="text-sm" style={{ color: "#a3aac4" }}>Required to run Claude Code on your computer.</p>
+              <a
+                href="https://nodejs.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 text-xs font-medium px-3 py-1.5 rounded-lg transition-colors"
+                style={{ background: "#192540", color: "#cc97ff", border: "1px solid rgba(204,151,255,0.3)" }}
+              >
+                nodejs.org →
+              </a>
             </div>
-            <div className="flex-1 pt-0.5">
-              <div className="flex items-start justify-between gap-4 flex-wrap">
-                <div>
-                  <p className="font-semibold text-zinc-900 text-sm">Install Node.js</p>
-                  <p className="text-zinc-500 text-sm mt-0.5">Required to run Claude Code on your computer.</p>
-                </div>
-                <a
-                  href="https://nodejs.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="shrink-0 text-xs font-medium bg-zinc-900 text-white px-3 py-1.5 rounded-lg hover:bg-zinc-700 transition-colors"
-                >
-                  nodejs.org →
-                </a>
-              </div>
-            </div>
-          </div>
+          </StepCheckbox>
 
           {/* Step 2 */}
-          <div className="flex gap-4 p-5 rounded-2xl border border-zinc-100 bg-white">
-            <div className="flex flex-col items-center gap-1 shrink-0">
-              <div className="w-7 h-7 rounded-full bg-green-100 text-green-600 text-xs font-bold flex items-center justify-center">2</div>
-              <div className="w-px flex-1 bg-zinc-100" />
+          <StepCheckbox lessonId={1} stepId="step-2" stepNumber={2} title="Create a GitHub account">
+            <div className="flex items-start justify-between gap-4 flex-wrap">
+              <p className="text-sm" style={{ color: "#a3aac4" }}>Free cloud storage for your project files.</p>
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 text-xs font-medium px-3 py-1.5 rounded-lg transition-colors"
+                style={{ background: "#192540", color: "#cc97ff", border: "1px solid rgba(204,151,255,0.3)" }}
+              >
+                github.com →
+              </a>
             </div>
-            <div className="flex-1 pt-0.5">
-              <div className="flex items-start justify-between gap-4 flex-wrap">
-                <div>
-                  <p className="font-semibold text-zinc-900 text-sm">Create a GitHub account</p>
-                  <p className="text-zinc-500 text-sm mt-0.5">Free cloud storage for your project files.</p>
-                </div>
-                <a
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="shrink-0 text-xs font-medium bg-zinc-900 text-white px-3 py-1.5 rounded-lg hover:bg-zinc-700 transition-colors"
-                >
-                  github.com →
-                </a>
-              </div>
-            </div>
-          </div>
+          </StepCheckbox>
 
           {/* Step 3 */}
-          <div className="flex gap-4 p-5 rounded-2xl border border-zinc-100 bg-white">
-            <div className="flex flex-col items-center gap-1 shrink-0">
-              <div className="w-7 h-7 rounded-full bg-green-100 text-green-600 text-xs font-bold flex items-center justify-center">3</div>
-              <div className="w-px flex-1 bg-zinc-100" />
+          <StepCheckbox lessonId={1} stepId="step-3" stepNumber={3} title="Create a Vercel account">
+            <div className="flex items-start justify-between gap-4 flex-wrap">
+              <p className="text-sm" style={{ color: "#a3aac4" }}>Sign up with GitHub to connect both at once.</p>
+              <a
+                href="https://vercel.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 text-xs font-medium px-3 py-1.5 rounded-lg transition-colors"
+                style={{ background: "#192540", color: "#cc97ff", border: "1px solid rgba(204,151,255,0.3)" }}
+              >
+                vercel.com →
+              </a>
             </div>
-            <div className="flex-1 pt-0.5">
-              <div className="flex items-start justify-between gap-4 flex-wrap">
-                <div>
-                  <p className="font-semibold text-zinc-900 text-sm">Create a Vercel account</p>
-                  <p className="text-zinc-500 text-sm mt-0.5">Sign up with GitHub to connect both at once.</p>
-                </div>
-                <a
-                  href="https://vercel.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="shrink-0 text-xs font-medium bg-zinc-900 text-white px-3 py-1.5 rounded-lg hover:bg-zinc-700 transition-colors"
-                >
-                  vercel.com →
-                </a>
-              </div>
-            </div>
-          </div>
+          </StepCheckbox>
 
           {/* Step 4 */}
-          <div className="flex gap-4 p-5 rounded-2xl border border-zinc-100 bg-white">
-            <div className="flex flex-col items-center gap-1 shrink-0">
-              <div className="w-7 h-7 rounded-full bg-green-100 text-green-600 text-xs font-bold flex items-center justify-center">4</div>
+          <StepCheckbox lessonId={1} stepId="step-4" stepNumber={4} title="Install Claude Code">
+            <p className="text-sm mb-3" style={{ color: "#a3aac4" }}>Open Terminal and paste:</p>
+            <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
+              <code className="text-green-400 text-xs font-mono flex-1 select-all">
+                npm install -g @anthropic-ai/claude-code
+              </code>
+              <CopyButton text="npm install -g @anthropic-ai/claude-code" />
             </div>
-            <div className="flex-1 pt-0.5">
-              <p className="font-semibold text-zinc-900 text-sm">Install Claude Code</p>
-              <p className="text-zinc-500 text-sm mt-0.5 mb-3">Open Terminal and paste:</p>
-              <div className="flex items-center gap-3 bg-zinc-900 rounded-xl px-4 py-3">
-                <code className="text-green-400 text-xs font-mono flex-1 select-all">
-                  npm install -g @anthropic-ai/claude-code
-                </code>
-                <CopyButton text="npm install -g @anthropic-ai/claude-code" />
-              </div>
-            </div>
-          </div>
+          </StepCheckbox>
 
         </div>
 
