@@ -9,7 +9,7 @@ import {
   ReactNode,
 } from "react";
 import { User } from "@supabase/supabase-js";
-import { supabase } from "./supabase";
+import { supabase } from "./supabase-browser";
 
 interface AuthContextType {
   user: User | null;
@@ -35,6 +35,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
   const [loading, setLoading]                   = useState(true);
   const mountedRef                              = useRef(true);
+  // Refs so async callbacks always read current values without stale closures
+  const totalXPRef           = useRef(0);
+  const completedLessonsRef  = useRef<number[]>([]);
+  const userRef              = useRef<User | null>(null);
+
+  // Keep refs in sync with state
+  useEffect(() => { totalXPRef.current = totalXP; }, [totalXP]);
+  useEffect(() => { completedLessonsRef.current = completedLessons; }, [completedLessons]);
+  useEffect(() => { userRef.current = user; }, [user]);
 
   // ── Fetch XP row for a user ──────────────────────────────────
   const fetchUserXP = async (userId: string) => {
@@ -84,11 +93,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // ── completeStep: save + immediately re-sync XP ─────────────
   const completeStep = async (lessonId: number, stepId: string) => {
-    if (!user) return;
+    const currentUser = userRef.current;
+    if (!currentUser) return;
 
     await supabase.from("user_progress").upsert(
       {
-        user_id: user.id,
+        user_id: currentUser.id,
         lesson_id: lessonId,
         step_id: stepId,
         completed_at: new Date().toISOString(),
@@ -97,28 +107,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     );
 
     // Re-sync so the XP counter reflects any DB-side changes
-    await fetchUserXP(user.id);
+    await fetchUserXP(currentUser.id);
   };
 
   // ── completeMission: award XP immediately in state ──────────
   const completeMission = async (lessonId: number) => {
-    if (!user) return;
+    const currentUser = userRef.current;
+    if (!currentUser) return;
 
-    // Guard against double-award using current React state
-    if (completedLessons.includes(lessonId)) return;
+    // Guard against double-award using ref (avoids stale closure)
+    if (completedLessonsRef.current.includes(lessonId)) return;
 
     // Optimistically update local state first so the navbar reflects
     // the new XP immediately without waiting for the DB round-trip
-    const newXP       = totalXP + 100;
-    const newCompleted = [...completedLessons, lessonId];
+    const newXP        = totalXPRef.current + 100;
+    const newCompleted = [...completedLessonsRef.current, lessonId];
 
     setTotalXP(newXP);
     setCompletedLessons(newCompleted);
 
-    // Persist to Supabase in the background
+    // Persist to Supabase
     const { error } = await supabase.from("user_xp").upsert(
       {
-        user_id: user.id,
+        user_id: currentUser.id,
         total_xp: newXP,
         completed_lessons: newCompleted,
       },
@@ -127,9 +138,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     if (error) {
       console.error("[auth] completeMission upsert error:", error.message);
-      // Reconcile with actual DB state if the write failed
-      if (mountedRef.current) await fetchUserXP(user.id);
     }
+
+    // Always re-sync after write so state matches DB exactly
+    if (mountedRef.current) await fetchUserXP(currentUser.id);
   };
 
   return (
