@@ -19,7 +19,7 @@ export default function StepCheckbox({
   title,
   children,
 }: StepCheckboxProps) {
-  const { user, completeStep } = useAuth();
+  const { user, completeStep, uncompleteStep } = useAuth();
   const [checked, setChecked] = useState(false);
   const [saving, setSaving] = useState(false);
   const [showSignInHint, setShowSignInHint] = useState(false);
@@ -43,7 +43,7 @@ export default function StepCheckbox({
   }, [user, lessonId, stepId]);
 
   const handleCheck = async () => {
-    if (checked || saving) return;
+    if (saving) return;
 
     if (!user) {
       setShowSignInHint(true);
@@ -52,14 +52,22 @@ export default function StepCheckbox({
     }
 
     setSaving(true);
-    setChecked(true); // Optimistic
 
-    await completeStep(lessonId, stepId);
-
-    // Notify MissionComplete that a step was finished
-    window.dispatchEvent(
-      new CustomEvent("step-completed", { detail: { lessonId, stepId } })
-    );
+    if (checked) {
+      // Uncheck: remove progress
+      setChecked(false); // Optimistic
+      await uncompleteStep(lessonId, stepId);
+      window.dispatchEvent(
+        new CustomEvent("step-uncompleted", { detail: { lessonId, stepId } })
+      );
+    } else {
+      // Check: save progress
+      setChecked(true); // Optimistic
+      await completeStep(lessonId, stepId);
+      window.dispatchEvent(
+        new CustomEvent("step-completed", { detail: { lessonId, stepId } })
+      );
+    }
 
     setSaving(false);
   };

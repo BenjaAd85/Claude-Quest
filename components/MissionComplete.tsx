@@ -49,6 +49,26 @@ export default function MissionComplete({ lessonId, totalSteps }: MissionComplet
     return () => window.removeEventListener("step-completed", handler);
   }, [lessonId]);
 
+  // Listen for steps being uncompleted on this page
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (detail?.lessonId === lessonId) {
+        setCompletedCount((n) => Math.max(0, n - 1));
+      }
+    };
+    window.addEventListener("step-uncompleted", handler);
+    return () => window.removeEventListener("step-uncompleted", handler);
+  }, [lessonId]);
+
+  // Hide banner when lesson is no longer complete
+  useEffect(() => {
+    if (!alreadyComplete && completedCount < totalSteps) {
+      setVisible(false);
+      setAwarded(false);
+    }
+  }, [alreadyComplete, completedCount, totalSteps]);
+
   // Award XP when all steps are done
   useEffect(() => {
     if (completedCount >= totalSteps && user && !awarded && !alreadyComplete) {

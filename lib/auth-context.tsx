@@ -17,6 +17,7 @@ interface AuthContextType {
   loading: boolean;
   completeStep: (lessonId: number, stepId: string) => Promise<void>;
   completeMission: (lessonId: number) => Promise<void>;
+  uncompleteStep: (lessonId: number, stepId: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -26,6 +27,7 @@ const AuthContext = createContext<AuthContextType>({
   loading: true,
   completeStep: async () => {},
   completeMission: async () => {},
+  uncompleteStep: async () => {},
 });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -83,6 +85,38 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     );
   };
 
+  const uncompleteStep = async (lessonId: number, stepId: string) => {
+    if (!user) return;
+
+    // Delete the step row from user_progress
+    await supabase
+      .from("user_progress")
+      .delete()
+      .eq("user_id", user.id)
+      .eq("lesson_id", lessonId)
+      .eq("step_id", stepId);
+
+    // If this lesson was marked complete, undo that
+    if (completedLessons.includes(lessonId)) {
+      const newXP = Math.max(0, totalXP - 100);
+      const newCompleted = completedLessons.filter((id) => id !== lessonId);
+
+      const { error } = await supabase.from("user_xp").upsert(
+        {
+          user_id: user.id,
+          total_xp: newXP,
+          completed_lessons: newCompleted,
+        },
+        { onConflict: "user_id" }
+      );
+
+      if (!error) {
+        setTotalXP(newXP);
+        setCompletedLessons(newCompleted);
+      }
+    }
+  };
+
   const completeMission = async (lessonId: number) => {
     if (!user) return;
     if (completedLessons.includes(lessonId)) return;
@@ -107,7 +141,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, totalXP, completedLessons, loading, completeStep, completeMission }}
+      value={{ user, totalXP, completedLessons, loading, completeStep, completeMission, uncompleteStep }}
     >
       {children}
     </AuthContext.Provider>
