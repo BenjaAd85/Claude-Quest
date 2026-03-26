@@ -48,28 +48,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    let mounted = true
     supabase.auth.getSession().then(({ data: { session } }) => {
-      const currentUser = session?.user ?? null;
-      setUser(currentUser);
-      if (currentUser) fetchUserXP(currentUser.id);
-      setLoading(false);
-    });
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      const currentUser = session?.user ?? null;
-      setUser(currentUser);
-      if (currentUser) {
-        await fetchUserXP(currentUser.id);
-      } else {
-        setTotalXP(0);
-        setCompletedLessons([]);
+      if (!mounted) return
+      setUser(session?.user ?? null)
+      if (session?.user) fetchUserXP(session.user.id)
+      setLoading(false)
+    })
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (!mounted) return
+        setUser(session?.user ?? null)
+        if (session?.user) fetchUserXP(session.user.id)
+        else setTotalXP(0)
+        setLoading(false)
       }
-      setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
+    )
+    return () => {
+      mounted = false
+      subscription.unsubscribe()
+    }
   }, []);
 
   const completeStep = async (lessonId: number, stepId: string) => {
