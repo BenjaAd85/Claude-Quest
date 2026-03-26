@@ -1,8 +1,5 @@
-"use client";
-
 import Link from "next/link";
 import NavBar from "@/components/NavBar";
-import { useAuth } from "@/lib/auth-context";
 
 const missionIcons: Record<number, string> = {
   1: "🤖",
@@ -67,8 +64,6 @@ const missions = [
 ];
 
 export default function Home() {
-  const { completedLessons } = useAuth();
-
   return (
     <div className="min-h-screen" style={{ background: "#060e20", color: "#dee5ff" }}>
 
@@ -137,7 +132,6 @@ export default function Home() {
               const isLeft = i % 2 === 0;
               const icon = missionIcons[mission.number];
               const numStr = String(mission.number).padStart(2, "0");
-              const isComplete = completedLessons.includes(mission.number);
 
               return (
                 <div key={mission.number} className="flex flex-col items-center">
@@ -153,10 +147,7 @@ export default function Home() {
                       className="mission-card-tree relative z-10 w-full max-w-xs rounded-2xl p-6 text-center"
                       style={{
                         background: "#0f1930",
-                        border: isComplete
-                          ? "1px solid rgba(107,255,143,0.3)"
-                          : "1px solid rgba(204, 151, 255, 0.15)",
-                        boxShadow: isComplete ? "inset 3px 0 0 #6bff8f" : undefined,
+                        border: "1px solid rgba(204, 151, 255, 0.15)",
                       }}
                     >
                       <div className="mb-3" style={{ fontSize: "3rem", lineHeight: 1 }}>{icon}</div>
@@ -191,7 +182,7 @@ export default function Home() {
                         className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full mb-3"
                         style={{ background: "rgba(107,255,143,0.12)", color: "#6bff8f" }}
                       >
-                        {isComplete ? "✓ COMPLETED" : `+${mission.xp} XP`}
+                        +{mission.xp} XP
                       </div>
                       <p className="text-xs font-medium" style={{ color: "#cc97ff" }}>
                         ENTER MISSION →
